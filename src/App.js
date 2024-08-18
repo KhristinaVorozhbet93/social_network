@@ -16,9 +16,9 @@ function App() {
     <div>
       <AccountApiContext.Provider value={accountApiClient}>
         <BrowserRouter>
-          <Routes>
+          {/* <Routes>
             <Route path="/account/update" element={<UpdateAccountData />} />
-          </Routes>
+          </Routes> */}
           {/* <Header /> */}
           <SocialNetwork />
           {/* <Footer /> */}

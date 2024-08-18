@@ -14,7 +14,7 @@ function SocialNetwork() {
 
     return (
             <div>
-                <Registration />
+                <Login />
                 {/* <button onClick={handleClick}>Настройки аккаунта</button>
             
             {showAccount && <Account />} */}

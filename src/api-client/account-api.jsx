@@ -7,7 +7,7 @@ class AccountClient {
 //передавать модель, а не данные и возвращать ответ
 constructor(host)
 {
-    this.host = "https://localhost:7150/";
+    this.host = "https://localhost:7299/";
 }
     async registerAccount(email, password) {
         try {

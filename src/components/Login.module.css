@@ -59,7 +59,8 @@
 .hidden_field {
     width: 360px;
     height: 30px;
-    color: white;
+    color: red;
+    font-size: 10px;
 }
 
 input::-webkit-input-placeholder,
