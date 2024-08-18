@@ -1,0 +1,101 @@
+* {
+    background-color: #2b2b2b;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 20px;
+}
+
+.box {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.main {
+    padding: 50px;
+}
+
+.registration {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.field {
+    width: 350px;
+    height: 25px;
+    margin: 8px;
+    border: 2px solid #36e2ff;
+    border-radius: 5px;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+.button_form {
+    border-radius: 5px;
+    width: 360px;
+    height: 30px;
+    margin-top: 50px;
+    background-color: #36e2ff;
+}
+
+.button {
+    background: none;
+    border: none;
+    padding: 10px;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    color: white;
+}
+
+.line {
+    margin: 25px;
+}
+
+.hidden_field {
+    width: 360px;
+    height: 30px;
+    color: white;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: white;
+}
+
+.text {
+    color: white;
+    padding-bottom: 50px;
+    font-size: 25px;
+}
+
+.group_buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.img {
+    height: 500px;
+    border-radius: 20px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    background-image: url('../images/pets.png');
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(100px);
+}
+
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+}
