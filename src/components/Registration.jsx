@@ -19,14 +19,14 @@ function Registration() {
         try {
             const passwordPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
             if (password === confirmedPassword && email && passwordPattern.test(password)) {
-                await accountApiClient.registerAccount(email, password);
+                const response = await accountApiClient.registerAccount(email, password);
                 setPasswordError(false);
                 setOpen(true);
             } else {
                 setPasswordError(true);
             }
         } catch (error) {
-            console.log(error.message);
+            alert(error.message);
         }
 
     });
