@@ -7,6 +7,8 @@ import SocialNetwork from './components/SocialNetwork';
 import AccountClient from './api-client/account-api';
 import UpdateAccountData from './components/Account/UpdateAccountData';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Registration from './components/Registration';
 
 const AccountApiContext = createContext();
 
@@ -16,12 +18,11 @@ function App() {
     <div>
       <AccountApiContext.Provider value={accountApiClient}>
         <BrowserRouter>
-          {/* <Routes>
-            <Route path="/account/update" element={<UpdateAccountData />} />
-          </Routes> */}
-          {/* <Header /> */}
+          <Routes> 
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/registration" element={<Registration />} />
+          </Routes>
           <SocialNetwork />
-          {/* <Footer /> */}
         </BrowserRouter>
       </AccountApiContext.Provider>
     </div>
