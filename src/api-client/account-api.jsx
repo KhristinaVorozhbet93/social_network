@@ -8,7 +8,6 @@ class AccountClient {
         this.host = "https://localhost:7299/";
     }
 
-
     async registerAccount(email, password) {
         try {
             const uri = "user/register";
@@ -16,28 +15,33 @@ class AccountClient {
             return response.data;
         }
         catch (error) {
-            if (error.response.status != HttpStatusCode.Ok) {
-                throw new Error(error.response.data.message);
-            }
-        }
-    }
-
-
-
-
-
-    async Login(email, password) {
-        try {
-            await axios.post('https://localhost:7150/account/login_by_password', { email, password })
-        }
-        catch (error) {
             if (error.response) {
-                if (error.response.status === HttpStatusCode.BadRequest) {
+                if (error.response.status != HttpStatusCode.Ok) {
                     throw new Error(error.response.data.message);
                 }
             }
         }
     }
+
+    async Login(email, password) {
+        try {
+            const uri = "user/login";
+            var response = await axios.post(`${this.host}${uri}`, { email, password });
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    if (error.response.status === HttpStatusCode.NotFound || error.response.status === HttpStatusCode.BadRequest) {
+                        throw new Error("Неверный логин и/или пароль");
+                    }
+                }
+            }
+        }
+    }
+
+
+
 
 
 

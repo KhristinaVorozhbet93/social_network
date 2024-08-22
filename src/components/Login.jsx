@@ -9,6 +9,7 @@ function Login() {
     const
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
+        [passwordError, setPasswordError] = useState(false),
         [errorMessage, setErrorMessage] = useState(""),
         accountApi = useAccountApi(),      
         navigate = useNavigate();
@@ -19,13 +20,16 @@ function Login() {
         try {
             if (password && email) {
                 await accountApi.Login(email, password);
+                setPasswordError(false);
                 //перенаправить на нужную страницу
                 //navigate("/user/login");
             } else {
-                alert("Заполните корректно поля, помеченные звездочкой");
+                setErrorMessage("Заполните все поля");
+                setPasswordError(true);
             }
         } catch (error) {
-            console.log(error.message);
+            setErrorMessage(error.message);
+            setPasswordError(true);
         }
     }
 
@@ -60,7 +64,7 @@ function Login() {
                             <input type="password" className={style.field} placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
                         <div>
-                            <label className={style.hidden_field} id="incorrectData" hidden>{errorMessage}</label>
+                            <label className={style.hidden_field} id="incorrectData" hidden={!passwordError}>{errorMessage}</label>
                         </div>
                         <button className={style.button_form} type="submit">Войти</button>
                     </form>
