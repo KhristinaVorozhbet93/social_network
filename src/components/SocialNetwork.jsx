@@ -1,8 +1,6 @@
 import { useState } from "react";
-import Account from "./Account/Account";
-import Login from "./Login";
-import Registration from "./Registration";
-import App from "../App";
+import LoginComponent from "./LoginComponent";
+import RegistrationComponent from "./RegistrationComponent";
 
 function SocialNetwork() {
     const [showAccount, setShowAccount] = useState(false);
@@ -13,9 +11,9 @@ function SocialNetwork() {
     };
 
     return (
-            <div>
-                <Login />
-            </div>
+        <div>
+            <LoginComponent />
+        </div>
     );
 }
 
