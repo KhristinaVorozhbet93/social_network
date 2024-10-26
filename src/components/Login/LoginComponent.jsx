@@ -1,6 +1,6 @@
 import style from "./Login.module.css";
 import LoginFormComponent from "./LoginFormComponent";
-import ImageStartComponent from "./ImageStartComponent";
+import ImageStartComponent from "../ImageStartComponent";
 
 function LoginComponent({ image }) {
     return (

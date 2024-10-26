@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from "./Registration.module.css";
 import Snackbar from '@mui/material/SnackbarContent';
-import { useAccountApi } from '../App';
+import { useAccountApi } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
 

@@ -1,12 +1,26 @@
 import React from "react";
-import style from "./Login.module.css";
+import style from "./ImageStartComponent.module.css";
+import image from "../images/pets.png"
 
-function ImageStartComponent({ image }) {
+//TODO: сделать генерацию картинок каждй раз разную
+function ImageStartComponent() {
   return (
-      <div className={`${style.img} ${style.box}`}>
-        <img src={image} className={style.image} />
+    <div className={style.container}>
+      <div className={style.blurredImage}>
+        <img
+          src={image}
+          className={style.img}
+        />
       </div>
-    );
-  };
+
+      <div className={style.clearImage}>
+        <img
+          src={image}
+          className={style.image}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default ImageStartComponent;

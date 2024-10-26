@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import style from "./Login.module.css"; // импортируйте стили
+import style from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
-import { useAccountApi } from '../App';
+import { useAccountApi } from '../../App';
 
 function LoginFormComponent () {
     const
@@ -17,10 +17,10 @@ function LoginFormComponent () {
 
     try {
         if (password && email) {
-            await accountApi.Login(email, password);
+            const response = await accountApi.Login(email, password);
+            localStorage.setItem('authToken', response.token);
             setPasswordError(false);
-            //перенаправить на нужную страницу
-            //navigate("/user/login");
+            navigate("/profile/user");
         } else {
             setErrorMessage("Заполните все поля");
             setPasswordError(true);
@@ -38,7 +38,6 @@ const handleRegistrationClick = async (e) => {
 
 const handleForgotPasswordClick = async (e) => {
     e.preventDefault();
-    //сделать подмену страниц
     navigate("/auth/login/password");
 }
 
@@ -85,14 +84,14 @@ const handleForgotPasswordClick = async (e) => {
       <div className={style.group_buttons}>
         <button
           className={style.button}
-          type="submit"
+          type="button"
           onClick={handleForgotPasswordClick}
         >
           Забыли пароль?
         </button>
         <button
           className={style.button}
-          type="submit"
+          type="button"
           onClick={handleRegistrationClick}
         >
           Регистрация

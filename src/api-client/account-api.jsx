@@ -5,12 +5,12 @@ class AccountClient {
     //если код ответа будет 500, то что-то вывести
     //передавать модель, а не данные
     constructor(host) {
-        this.host = "https://localhost:7299/";
+        this.host = "https://localhost:7243/";
     }
 
     async registerAccount(email, password) {
         try {
-            const uri = "user/register";
+            const uri = "auth/register";
             var response = await axios.post(`${this.host}${uri}`, { email, password });
             return response.data;
         }
@@ -25,7 +25,7 @@ class AccountClient {
 
     async Login(email, password) {
         try {
-            const uri = "user/login";
+            const uri = "auth/login";
             var response = await axios.post(`${this.host}${uri}`, { email, password });
             return response.data;
         }
@@ -39,35 +39,5 @@ class AccountClient {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-    async deleteAccount(id) {
-        try {
-            await axios.post('https://localhost:7150/account/delete_account', { id });
-        } catch (error) {
-            if (error.response && error.response.status === HttpStatusCode.BadRequest) {
-                throw new Error(error.response.data.message);
-            }
-        }
-    };
-
-    async updateAccountPassword(id) {
-        try {
-            await axios.post('https://localhost:7150/account/delete_account', { id });
-        } catch (error) {
-            if (error.response && error.response.status === HttpStatusCode.BadRequest) {
-                console.log(error.response.data.message);
-            } else {
-                console.log('Неизвестная ошибка', error.message);
-            }
-        }
-    };
 }
 export default AccountClient; 
