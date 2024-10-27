@@ -1,0 +1,7 @@
+.asid {
+  background-color: #eee;
+  width: 20vh;
+  height: 100%;
+  position: fixed;
+  top: 100px;
+}

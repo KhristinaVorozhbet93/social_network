@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
@@ -41,6 +41,10 @@ const handleForgotPasswordClick = async (e) => {
     navigate("/auth/login/password");
 }
 
+useEffect(() => {
+  return () => {
+  };
+}, []);
   return (
     <div className={`${style.registration} ${style.box}`}>
       <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>

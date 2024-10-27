@@ -1,18 +1,17 @@
-import Header from "../Header";
-import Footer from "../Footer";
-import Aside from "../Aside";
+import HeaderComponent from "../HeaderComponent";
+import AsideComponent from "../AsideComponent";
+import FooterComponent from "../FooterComponent";
+import style from "./UserProfileComponent.module.css";
+
+function UserProfileComponent() {
+    return (
+        <>
+            <HeaderComponent></HeaderComponent>
+            <AsideComponent></AsideComponent>
+            <FooterComponent></FooterComponent>
+        </>)
 
 
-function UserProfileComponent()
-{
-    return(
-    <>
-    <Header></Header>
-    <Aside></Aside>
-    <Footer></Footer>
-    </>)
-
-    
     //Сделать на выходных:
     //будет состоять из маленьких компонентов:
     //Header
@@ -24,7 +23,6 @@ function UserProfileComponent()
     //Footer
 
     //сейчас нужно сделать Header, Footer, Asider
-    //доделать авторизацию в localStorage сохранить его и уже использовать дальше
     //проблема забыли пароль не реализована 
 }
 
