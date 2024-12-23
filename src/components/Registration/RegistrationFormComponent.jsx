@@ -3,6 +3,7 @@ import style from "./Registration.module.css";
 import Snackbar from '@mui/material/SnackbarContent';
 import { useAccountApi } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import image from "../../images/paws.jpg";
 
 
 function RegistrationFormComponent() {
@@ -41,6 +42,7 @@ function RegistrationFormComponent() {
 
     return (
         <div className={`${style.registration} ${style.box}`}>
+            {/* <img src={image}className={style.img}/> */}
             <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
             <p className={style.text}>Регистрация</p>
             <hr className={style.line} />

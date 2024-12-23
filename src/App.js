@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RegistrationComponent from './components/Registration/RegistrationComponent';
 import LoginComponent from './components/Login/LoginComponent';
 import UserProfileComponent from './components/UserProfile/UserProfileComponent';
+import ForgotPasswordComponent from './components/Account/ForgotPasswordComponent';
+import CodeComponent from './components/Account/CodeComponent';
 
 const AccountApiContext = createContext();
 
@@ -19,6 +21,8 @@ function App() {
           <Routes> 
             <Route path="/auth/login" element={<LoginComponent />} />
             <Route path="/auth/registration" element={<RegistrationComponent />} />
+            <Route path="/auth/password" element={<ForgotPasswordComponent />} />
+            <Route path="/auth/code" element={<CodeComponent />} />
             <Route path="/profile/user" element={<UserProfileComponent />} />
           </Routes>
           <SocialNetwork />

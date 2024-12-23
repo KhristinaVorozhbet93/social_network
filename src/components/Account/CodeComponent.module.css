@@ -25,26 +25,44 @@
 
 .field {
     width: 400px;
-    height: 40px;
+    height: 80px;
     margin: 8px;
     border: 2px solid #36e2ff;
     border-radius: 5px;
     background-color: #2b2b2b;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
+    text-align: center;
 }
 
-.button {
+.button_form {
     border-radius: 5px;
     width: 410px;
-    height: 40px;
-    margin-top: 70px;
+    height: 60px;
+    margin-top: 30px;
     background-color: #36e2ff;
     font-size: 20px;
 }
 
+.button {
+    background: none;
+    border: none;
+    padding: 10px;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    color: white;
+}
+
 .line {
     margin: 25px;
+}
+
+.hidden_field {
+    width: 360px;
+    height: 30px;
+    color: red;
+    font-size: 15px;
 }
 
 input::-webkit-input-placeholder,
@@ -62,11 +80,3 @@ textarea::-webkit-input-placeholder {
     font-size: 45px;
     padding-bottom: 5px;
 }
-
-.hidden_field {
-    width: 360px;
-    height: 30px;
-    color: red;
-    font-size: 15px;
-}
-

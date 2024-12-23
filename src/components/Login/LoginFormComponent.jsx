@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
+import image from "../../images/paws.jpg";
 
 function LoginFormComponent () {
     const
@@ -17,7 +18,7 @@ function LoginFormComponent () {
 
     try {
         if (password && email) {
-            const response = await accountApi.Login(email, password);
+            const response = await accountApi.login(email, password);
             localStorage.setItem('authToken', response.token);
             setPasswordError(false);
             navigate("/profile/user");
@@ -38,7 +39,7 @@ const handleRegistrationClick = async (e) => {
 
 const handleForgotPasswordClick = async (e) => {
     e.preventDefault();
-    navigate("/auth/login/password");
+    navigate("/auth/password");
 }
 
 useEffect(() => {
@@ -47,6 +48,7 @@ useEffect(() => {
 }, []);
   return (
     <div className={`${style.registration} ${style.box}`}>
+      {/* <img src={image}className={style.img}/> */}
       <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
       <p className={style.text}>Вход</p>
       <hr className={style.line} />
