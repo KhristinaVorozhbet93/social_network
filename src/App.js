@@ -24,8 +24,8 @@ function App() {
             <Route path="/auth/password" element={<ForgotPasswordComponent />} />
             <Route path="/auth/code" element={<CodeComponent />} />
             <Route path="/profile/user" element={<UserProfileComponent />} />
+            <Route path="/" element={<SocialNetwork />} />
           </Routes>
-          <SocialNetwork />
         </BrowserRouter>
       </AccountApiContext.Provider>
     </div>

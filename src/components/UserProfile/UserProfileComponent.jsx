@@ -5,25 +5,12 @@ import style from "./UserProfileComponent.module.css";
 
 function UserProfileComponent() {
     return (
-        <>
+        <div className={style.container}>
             <HeaderComponent></HeaderComponent>
             <AsideComponent></AsideComponent>
             <FooterComponent></FooterComponent>
-        </>)
-
-
-    //Сделать на выходных:
-    //будет состоять из маленьких компонентов:
-    //Header
-    //Asider
-    //1. Фото профиля
-    //2. Данные о себе
-    //3. Друзья онлайн
-    //4. Загруженные фото
-    //Footer
-
-    //сейчас нужно сделать Header, Footer, Asider
-    //проблема забыли пароль не реализована 
+        </div>
+    )
 }
 
 export default UserProfileComponent;

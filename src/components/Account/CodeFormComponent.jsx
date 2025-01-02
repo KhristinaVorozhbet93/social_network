@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./CodeComponent.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import image from "../../images/paws.jpg";
 import { useAccountApi } from '../../App';
 
 function CodeFormComponent() {
@@ -14,30 +13,53 @@ function CodeFormComponent() {
         location = useLocation(),
         navigate = useNavigate();
 
-    const fetchData = async () => {
+    useEffect(() => {
+        const fetchDataOnLoad = async () => {
+            const codeSent = localStorage.getItem('codeSent');
+
+            if (!codeSent) {
+                try {
+                    await fetchCodeFromBackend();
+                    localStorage.setItem('codeSent', 'true') 
+                    console.log(code);
+                }
+                catch (error) {
+                    setErrorMessage(error.message);
+                    setError(true);
+                }
+            }
+        };
+        fetchDataOnLoad();
+    }, []);
+
+    const fetchCodeFromBackend = async () => {
+        const email = location.state?.email;
         try {
-            sendCodeToEmail();
-        } catch (error) {
+            await accountApi.sendCodeToEmail(email);
+        }
+        catch (error) {
             setErrorMessage(error.message);
             setError(true);
         }
-    };
+    }
 
-    useEffect(() => {
-        fetchData();
-    });
-
-    const sendCodeToEmail = async (e) => {
+    const resendCodeToEmail = async (e) => {
+        e.preventDefault();
         const email = location.state?.email;
-        const code = await accountApi.sendCodeToEmail(email);
-        setSendCode(code);
+        try {
+            const code = await accountApi.sendCodeToEmail(email);
+            setSendCode(code);
+        }
+        catch (error) {
+            setErrorMessage(error.message);
+            setError(true);
+        }
     }
 
     const submitChangePasswordData = async (e) => {
         e.preventDefault();
-
         try {
-            if (code !== sendCode) {
+            if (code.trim() !== String(sendCode).trim()) {
                 setErrorMessage("Вы ввели неверынй код");
                 setError(true);
             }
@@ -55,7 +77,6 @@ function CodeFormComponent() {
 
     return (
         <div className={`${style.registration} ${style.box}`}>
-            {/* <img src={image}className={style.img}/> */}
             <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
             <p className={style.text}>Введите код, отправленный на вашу почту</p>
             <hr className={style.line} />
@@ -83,7 +104,7 @@ function CodeFormComponent() {
                     Изменить пароль
                 </button>
             </form>
-            <form onSubmit={sendCodeToEmail}>
+            <form onSubmit={resendCodeToEmail}>
                 <button className={style.button_form} type="submit">
                     Отправить код повторно
                 </button>

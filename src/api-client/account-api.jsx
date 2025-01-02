@@ -39,8 +39,8 @@ class AccountClient {
 
     async resetPassword(email, password) {
         try {
-            const uri = "api/Auth/ResetPassword";
-            var response = await axios.post(`${this.host}${uri}`, { email, password });
+            const uri = "api/Auth/ResetPassword";       
+            var response = await axios.put(`${this.host}${uri}`, { email: email, newPassword: password });
             return response.data;
         }
         catch (error) {
@@ -54,9 +54,8 @@ class AccountClient {
 
     async sendCodeToEmail(email) {
         try {
-              //возможно понадобятся остальные данные
             const uri = "api/Notification/SendCodeToEmail";
-            var response = await axios.post(`${this.host}${uri}`, { email });
+            var response = await axios.post(`${this.host}${uri}`, { recepientEmail: email });
             return response.data;
         }
         catch (error) {
