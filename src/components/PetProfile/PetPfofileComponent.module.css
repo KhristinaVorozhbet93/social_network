@@ -1,0 +1,103 @@
+.container {
+    width: 100%;
+    max-width: 2000px;
+    min-width: 1000px;
+    border: 2px solid #36e2ff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.cont {
+    padding-left: 100px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10vh;
+    background-color: grey;
+}
+
+.main_content {
+    flex: 1;
+    padding: 20px;
+}
+
+.initialView {
+    text-align: center;
+}
+
+.addButton {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #36e2ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.activeTab {
+    background-color: #36e2ff;
+}
+
+.tabContent {
+    padding: 20px;
+    background-color: grey;
+}
+
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.field {
+    margin: 8px;
+    padding: 10px;
+    border: 2px solid #36e2ff;
+    border-radius: 5px;
+    background-color: #2b2b2b;
+    color: white;
+    font-size: 16px;
+}
+
+.formContent {
+    padding: 10px;
+}
+
+.buttonForm {
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #36e2ff;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+textarea {
+    height: 100px;
+}

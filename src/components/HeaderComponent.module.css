@@ -1,6 +1,32 @@
-.header {
-  background-color: #f0f0f0;
+.container {
+  background-color: #2b2b2b;
   height: 10vh;
   width: 100%;
+  color: white;
+  align-items: center;
+  display: flex;
+  top: 0;
+  z-index: 100;
+  color: white;
+  box-sizing: border-box;
   position: fixed;
+}
+
+.button {
+  position: fixed;
+  font-size: 20px;
+}
+
+.exit {
+  margin-left: auto;
+}
+
+.text {
+  font-size: 50px;
+  margin-left: 15px;
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
 }

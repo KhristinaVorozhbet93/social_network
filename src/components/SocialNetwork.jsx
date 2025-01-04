@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react";
 import LoginComponent from "./Login/LoginComponent";
+import style from './SocialNetwork.module.css'
 
 function SocialNetwork() {
     const [showAccount, setShowAccount] = useState(false);
@@ -12,7 +13,7 @@ function SocialNetwork() {
     }, []); 
   
     return (
-      <div>
+      <div className={style.container}>
         {showAccount && <LoginComponent />} 
       </div>
     );

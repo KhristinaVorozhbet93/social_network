@@ -9,6 +9,7 @@ import LoginComponent from './components/Login/LoginComponent';
 import UserProfileComponent from './components/UserProfile/UserProfileComponent';
 import ForgotPasswordComponent from './components/Account/ForgotPasswordComponent';
 import CodeComponent from './components/Account/CodeComponent';
+import PetProfileComponent from './components/PetProfile/PetPfofileComponent';
 
 const AccountApiContext = createContext();
 
@@ -24,8 +25,9 @@ function App() {
             <Route path="/auth/password" element={<ForgotPasswordComponent />} />
             <Route path="/auth/code" element={<CodeComponent />} />
             <Route path="/profile/user" element={<UserProfileComponent />} />
+            <Route path="/profile/pet" element={<PetProfileComponent />} />
+            <Route path="/" element={<SocialNetwork />} />
           </Routes>
-          <SocialNetwork />
         </BrowserRouter>
       </AccountApiContext.Provider>
     </div>

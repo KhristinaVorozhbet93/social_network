@@ -1,0 +1,7 @@
+.container {
+    display: flex;        /* Включаем flexbox для контейнера */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;    /* Центрирование по вертикали */
+    min-height: 100vh;      /* Устанавливаем минимальную высоту для контейнера */
+    background-color: #f0f0f0;
+  }

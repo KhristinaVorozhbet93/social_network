@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "./ForgotPasswordComponent.module.css";
 import { useNavigate } from "react-router-dom";
-import image from "../../images/paws.jpg";
+// import image from "../../images/paws.jpg";
 
 function ForgotPasswordFormComponent() {
   const
