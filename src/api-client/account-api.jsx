@@ -110,5 +110,52 @@ class AccountClient {
             }
         }
     }
+
+
+    async updatePetProfile(editedProfile) {
+        try {
+            const uri = "api/PetProfile/UpdatePetProfile";
+            var response = await axios.put(`${this.host}${uri}`, editedProfile);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async getUserProfile(accountId) {
+        try {
+            const uri = "api/UserProfile/GetUserProfileByAccountId";
+            var response = await axios.get(`${this.host}${uri}?id=${accountId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async updateUserProfile(editedProfile) {
+        try {
+            const uri = "api/UserProfile/UpdateUserProfile";
+            var response = await axios.put(`${this.host}${uri}`, editedProfile);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
 }
 export default AccountClient; 
