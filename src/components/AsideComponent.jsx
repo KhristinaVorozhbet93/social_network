@@ -66,21 +66,6 @@ function AsideComponent() {
             </div>
         </aside>
     );
-                <div onClick={() => handleNavigate('/profile')}>
-                    Магазин
-                    <img src={storeIcon} alt="Store Icon" className={style.icon} />
-                </div>
-                <div onClick={() => handleNavigate('/profile')}>
-                    Форум
-                    <img src={forumIcon} alt="Forum Icon" className={style.icon} />
-                </div>
-                <div onClick={() => handleNavigate('/profile')}>
-                    Настройки
-                    <img src={settingsIcon} alt="Settings Icon" className={style.icon} />
-                </div>
-            </div>
-        </aside>
-    );
 }
 
 export default AsideComponent; 
