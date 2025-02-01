@@ -22,7 +22,6 @@ import settingsIcon from '../images/settings.png';
 
 function AsideComponent() {
     const navigate = useNavigate();
-    const navigate = useNavigate();
 
     const handleNavigate = (path) => {
         navigate(path);
