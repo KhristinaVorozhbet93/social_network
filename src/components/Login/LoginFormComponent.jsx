@@ -3,6 +3,7 @@ import style from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
 import PawComponent from "../Paw/PawComponent";
+import PawComponent from "../Paw/PawComponent";
 
 function LoginFormComponent () {
     const
@@ -52,8 +53,10 @@ useEffect(() => {
   return (
     <div className={`${style.registration} ${style.box}`}>
       <PawComponent/>
+      <PawComponent/>
       <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
       <p className={style.text}>Вход</p>
+  
   
       <hr className={style.line} />
       <form onSubmit={submitAuthentificationData}>

@@ -2,6 +2,8 @@ import React from 'react';
 import style from './HeaderComponent.module.css'
 import PawComponent from './Paw/PawComponent';
 import { useNavigate } from 'react-router-dom';
+import PawComponent from './Paw/PawComponent';
+import { useNavigate } from 'react-router-dom';
 
 function HeaderComponent() {
      const navigate = useNavigate();

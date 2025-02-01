@@ -10,8 +10,18 @@ import storeIcon from '../images/shop.png';
 import forumIcon from '../images/forum.png';
 import settingsIcon from '../images/settings.png';
 
+import profileIcon from '../images/userProfile.png';
+import petIcon from '../images/petProfile.png';
+import friendsIcon from '../images/friends.png';
+import chatsIcon from '../images/chats.png';
+import calendarIcon from '../images/calendar.png';
+import storeIcon from '../images/shop.png';
+import forumIcon from '../images/forum.png';
+import settingsIcon from '../images/settings.png';
+
 
 function AsideComponent() {
+    const navigate = useNavigate();
     const navigate = useNavigate();
 
     const handleNavigate = (path) => {
@@ -42,6 +52,21 @@ function AsideComponent() {
                     <img src={calendarIcon} alt="Calendar Icon" className={style.icon} />
                 </div>
 
+                <div onClick={() => handleNavigate('/profile')}>
+                    Магазин
+                    <img src={storeIcon} alt="Store Icon" className={style.icon} />
+                </div>
+                <div onClick={() => handleNavigate('/profile')}>
+                    Форум
+                    <img src={forumIcon} alt="Forum Icon" className={style.icon} />
+                </div>
+                <div onClick={() => handleNavigate('/profile')}>
+                    Настройки
+                    <img src={settingsIcon} alt="Settings Icon" className={style.icon} />
+                </div>
+            </div>
+        </aside>
+    );
                 <div onClick={() => handleNavigate('/profile')}>
                     Магазин
                     <img src={storeIcon} alt="Store Icon" className={style.icon} />

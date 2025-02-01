@@ -31,3 +31,22 @@
   cursor: pointer;
   color: white;
 }
+
+.button {
+  position: fixed;
+  font-size: 20px;
+}
+
+.exit {
+  margin-left: auto;
+}
+
+.text {
+  font-size: 50px;
+  margin-left: 15px;
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}

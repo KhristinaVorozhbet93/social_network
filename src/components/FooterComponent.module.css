@@ -1,7 +1,10 @@
 .footer {
     background-color: #2b2b2b;
     height: 10vh;
+    background-color: #2b2b2b;
+    height: 10vh;
     width: 100%;
+    max-width: 2000px;
     max-width: 2000px;
     bottom: 0;
     z-index: 10;
