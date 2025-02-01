@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    max-width: 2000px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10vh;
+    background-color: grey;
+  }
+  
+  .main_content {
+    flex: 1;
+    padding: 20px;
+  }
+  

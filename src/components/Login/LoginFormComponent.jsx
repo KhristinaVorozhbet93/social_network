@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
-import image from "../../images/paws.jpg";
+import PawComponent from "../Paw/PawComponent";
 
 function LoginFormComponent () {
     const
@@ -20,6 +20,9 @@ function LoginFormComponent () {
         if (password && email) {
             const response = await accountApi.login(email, password);
             localStorage.setItem('authToken', response.token);
+            localStorage.setItem('accountId', response.id);
+            const profile = await accountApi.getUserProfile(response.id);
+            localStorage.setItem('profileId', profile.id);
             setPasswordError(false);
             navigate("/profile/user");
         } else {
@@ -48,9 +51,10 @@ useEffect(() => {
 }, []);
   return (
     <div className={`${style.registration} ${style.box}`}>
-      {/* <img src={image}className={style.img}/> */}
+      <PawComponent/>
       <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
       <p className={style.text}>Вход</p>
+  
       <hr className={style.line} />
       <form onSubmit={submitAuthentificationData}>
         <div>
@@ -102,7 +106,10 @@ useEffect(() => {
         >
           Регистрация
         </button>
+        
       </div>
+      
+      <PawComponent/>
     </div>
   );
 };

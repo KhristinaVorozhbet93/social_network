@@ -1,6 +1,7 @@
 import style from "./ForgotPasswordComponent.module.css";
 import ForgotPasswordFormComponent from "../Account/ForgotPasswordFormComponent";
 import ImageStartComponent from "../ImageStartComponent";
+import FooterComponent from "../FooterComponent";
 
 function ForgotPasswordComponent({ image }) {
     return (
@@ -10,6 +11,7 @@ function ForgotPasswordComponent({ image }) {
                 <ImageStartComponent image={image} />
                 <ForgotPasswordFormComponent />
             </div>
+            <FooterComponent />
         </div>
     );
 };

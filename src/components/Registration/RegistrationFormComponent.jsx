@@ -3,7 +3,7 @@ import style from "./Registration.module.css";
 import Snackbar from '@mui/material/SnackbarContent';
 import { useAccountApi } from '../../App';
 import { useNavigate } from 'react-router-dom';
-import image from "../../images/paws.jpg";
+// import image from "../../images/paws.jpg";
 
 
 function RegistrationFormComponent() {

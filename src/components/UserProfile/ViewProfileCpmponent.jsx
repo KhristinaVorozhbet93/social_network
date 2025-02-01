@@ -1,41 +1,48 @@
-import React, { useState, useEffect } from 'react';
 import style from './UserProfileComponent.module.css';
 import HeaderComponent from "../HeaderComponent";
 import AsideComponent from "../AsideComponent";
 import FooterComponent from "../FooterComponent";
 import { useAccountApi } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-function UserProfileComponent() {
+function ViewProfileComponent() {
     const
-        [profile, setProfile] = useState(null),
-        [loading, setLoading] = useState(true),
-        navigate = useNavigate(),
-        accountApi = useAccountApi();
+        [profile, setProfile] = useState(false),
+        [loading, setLoading] = useState(false),
+        [isFriend, setIsFriend] = useState(false),
+        { id } = useParams(),
+        accountApi = useAccountApi(),
+        navigate = useNavigate();
 
     useEffect(() => {
         const fetchProfile = async () => {
             setLoading(true);
             try {
-                const profileId = localStorage.getItem('profileId');          
-                const data = await accountApi.getUserProfileById(profileId);
+                const data = await accountApi.getUserProfileById(id);
                 setProfile(data);
-            }
-            finally {
+
+                //проверить в друзьях пользователь или нет
+                const checkFriend = await accountApi.isFriend(id);
+                setIsFriend(checkFriend);
+            } finally {
                 setLoading(false);
             }
         };
         fetchProfile();
-    }, []);
+    }, [id, accountApi]);
 
-
-    const handleEditClick = () => {
-        navigate("/profile/user/update");
+    const handleAddFriend = async () => {
+        const profileId = localStorage.getItem('profileId');          
+        await accountApi.sendRequestToFriend(profileId, id);
     };
 
-   
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Загрузка...</div>;
+    }
+
+    if (!profile) {
+        return <div>Пользователь не найден.</div>;
     }
 
     return (
@@ -44,14 +51,16 @@ function UserProfileComponent() {
             <div className={style.content}>
                 <AsideComponent />
                 <div className={style.main_content}>
-                    <div className={style.formContent} >
+                    <div className={style.formContent}>
                         {profile.photo && <img src={profile.photo} alt="User Profile" style={{ maxWidth: '100px' }} />}
                         <p>Имя: {profile.firstName}</p>
                         <p>Фамилия: {profile.lastName}</p>
                         <p>Дата рождения: {profile.dateOfBirth?.split('T')[0]}</p>
                         <p>Гуляет с собаками: {profile.walksDogs ? 'Да' : 'Нет'}</p>
                         <p>Профессия: {profile.profession}</p>
-                        <button onClick={handleEditClick}>Редактировать</button>
+                        {!isFriend && (
+                            <button onClick={handleAddFriend}>Добавить в друзья</button>
+                        )}
                     </div>
                 </div>
             </div>
@@ -60,4 +69,4 @@ function UserProfileComponent() {
     );
 }
 
-export default UserProfileComponent;
+export default ViewProfileComponent;

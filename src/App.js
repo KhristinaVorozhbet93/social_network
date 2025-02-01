@@ -9,6 +9,12 @@ import LoginComponent from './components/Login/LoginComponent';
 import UserProfileComponent from './components/UserProfile/UserProfileComponent';
 import ForgotPasswordComponent from './components/Account/ForgotPasswordComponent';
 import CodeComponent from './components/Account/CodeComponent';
+import PetProfileComponent from './components/PetProfile/PetPfofileComponent';
+import UpdateUserProfileComponent from './components/UserProfile/UpdateUserProfileCpmponent';
+import FriendsListComponent from './components/Friends/FriendsListComponent';
+import FriendsSearchComponent from './components/Friends/FriendsSearchComponent';
+import ViewProfileComponent from './components/UserProfile/ViewProfileCpmponent';
+// import UpdateUserProfileComponent from './components/UserProfile/UpdateUserProfileComponent';
 
 const AccountApiContext = createContext();
 
@@ -24,8 +30,13 @@ function App() {
             <Route path="/auth/password" element={<ForgotPasswordComponent />} />
             <Route path="/auth/code" element={<CodeComponent />} />
             <Route path="/profile/user" element={<UserProfileComponent />} />
+            <Route path="/profile/user/update" element={<UpdateUserProfileComponent/>} />
+            <Route path="/profile/pet" element={<PetProfileComponent />} />
+            <Route path="/friends" element={<FriendsListComponent />} />
+            <Route path="/friends/search" element={<FriendsSearchComponent />} />
+            <Route path="/profile/user/:id" element={<ViewProfileComponent />} />
+            <Route exact path="/" element={<SocialNetwork />} />
           </Routes>
-          <SocialNetwork />
         </BrowserRouter>
       </AccountApiContext.Provider>
     </div>
