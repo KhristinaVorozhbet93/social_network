@@ -1,14 +1,11 @@
 import style from "./CodeComponent.module.css";
 import CodeFormComponent from "../Account/CodeFormComponent";
-import ImageStartComponent from "../ImageStartComponent";
 import FooterComponent from "../FooterComponent";
 
 function CodeComponent({ image }) {
     return (
-        <div className={style.main}>
-            <hr />
-            <div className={style.container}>
-                <ImageStartComponent image={image} />
+        <div className={style.container}>
+            <div className={style.main}>
                 <CodeFormComponent />
             </div>
             <FooterComponent />

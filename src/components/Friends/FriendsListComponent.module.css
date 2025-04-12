@@ -1,0 +1,141 @@
+.tabs {
+    display: flex;
+    background-color: var(--background-color); 
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.tabs button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px 5px 0 0;
+}
+
+.tabs button:hover {
+    background-color:#f8f8f8;
+    color: #333;
+}
+
+.tabs button.active {
+    background-color: #fff;
+    color: #ff9800; 
+    border-bottom: 2px solid #ff9800; 
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.friendsListContainer {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    margin: 20px; 
+    justify-content: center;
+}
+
+.friendItem {
+    display: flex; 
+    align-items: center; 
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.friendItem:hover {
+    background-color:#f8f8f8;
+}
+
+.friendPhoto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px; 
+    object-fit: cover;
+}
+
+.friendInfo {
+    font-size: 25px;
+    color: #333;
+    white-space: nowrap; 
+}
+
+div {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #777;
+}
+
+.menuButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #888;
+    margin-left: auto; 
+  }
+  
+  .menuButton:hover {
+    color: #333;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 30;
+    right: 4%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10; 
+    min-width: 150px; 
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .menuButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ff9800;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu button:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}
+
+.text
+{
+    font-size: 20px;
+    color: #333;
+}

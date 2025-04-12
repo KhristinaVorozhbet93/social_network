@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import style from "./CodeComponent.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
+import { Snackbar, Alert, CircularProgress } from '@mui/material';
 
 function CodeFormComponent() {
     const
         [code, setCode] = useState(""),
         [sendCode, setSendCode] = useState(""),
-        [error, setError] = useState(false),
-        [errorMessage, setErrorMessage] = useState(""),
+        [isSubmitting, setIsSubmitting] = useState(false),
+        [isResending, setIsResending] = useState(false),
+        [snackbarOpen, setSnackbarOpen] = useState(false),
+        [snackbarMessage, setSnackbarMessage] = useState(""),
+        [snackbarSeverity, setSnackbarSeverity] = useState("error"),
         accountApi = useAccountApi(),
         location = useLocation(),
         navigate = useNavigate();
@@ -19,13 +23,11 @@ function CodeFormComponent() {
 
             if (!codeSent) {
                 try {
+                    setIsResending(true);
                     await fetchCodeFromBackend();
-                    localStorage.setItem('codeSent', 'true') 
-                    console.log(code);
-                }
-                catch (error) {
-                    setErrorMessage(error.message);
-                    setError(true);
+                    localStorage.setItem('codeSent', 'true');
+                } finally {
+                    setIsResending(false);
                 }
             }
         };
@@ -34,46 +36,61 @@ function CodeFormComponent() {
 
     const fetchCodeFromBackend = async () => {
         const email = location.state?.email;
-        try {
-            await accountApi.sendCodeToEmail(email);
-        }
-        catch (error) {
-            setErrorMessage(error.message);
-            setError(true);
-        }
+        const code = await accountApi.sendCodeToEmail(email);
+        setSendCode(code);
     }
 
     const resendCodeToEmail = async (e) => {
         e.preventDefault();
         const email = location.state?.email;
         try {
+            setIsResending(true); 
             const code = await accountApi.sendCodeToEmail(email);
             setSendCode(code);
-        }
-        catch (error) {
-            setErrorMessage(error.message);
-            setError(true);
+            handleSnackbarOpen("Код повторно отправлен на вашу почту", "success");
+        } finally {
+            setIsResending(false); 
         }
     }
 
     const submitChangePasswordData = async (e) => {
         e.preventDefault();
+        e.preventDefault();
         try {
             if (code.trim() !== String(sendCode).trim()) {
-                setErrorMessage("Вы ввели неверынй код");
-                setError(true);
+                handleSnackbarOpen("Введен неверный код", "error");
             }
             else {
+                setIsSubmitting(true); 
                 const { email, password } = location.state || {};
+                console.log(email);
+                console.log(password);
                 await accountApi.resetPassword(email, password);
-                navigate("/auth/login");
+                handleSnackbarOpen("Пароль успешно изменен", "success");
+                setTimeout(() => {
+                    navigate("/auth/login");
+                }, 5000);
             }
-
+    
         } catch (error) {
-            setErrorMessage(error.message);
-            setError(true);
+            handleSnackbarOpen(error.message, "error");
+          }finally {
+            setIsSubmitting(false); 
         }
     }
+
+    const handleSnackbarOpen = (message, severity) => {
+        setSnackbarMessage(message);
+        setSnackbarSeverity(severity);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
 
     return (
         <div className={`${style.registration} ${style.box}`}>
@@ -88,27 +105,28 @@ function CodeFormComponent() {
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         required
+                        disabled={isSubmitting || isResending}
                     />
                 </div>
-
-                <div>
-                    <label
-                        className={style.hidden_field}
-                        id="incorrectData"
-                        hidden={!error}
-                    >
-                        {errorMessage}
-                    </label>
-                </div>
-                <button className={style.button_form} type="submit">
-                    Изменить пароль
+                <button className={style.button_form} type="submit" disabled={isSubmitting || isResending}>
+                    {isSubmitting ? <CircularProgress size={24} color="inherit" /> : 'Изменить пароль'}
                 </button>
             </form>
             <form onSubmit={resendCodeToEmail}>
-                <button className={style.button_form} type="submit">
-                    Отправить код повторно
+                <button className={style.button_form} type="submit" disabled={isSubmitting || isResending}>
+                    {isResending ? <CircularProgress size={24} color="inherit" /> : 'Отправить код повторно'}
                 </button>
             </form>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={5000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #795548;
+  --secondary-color: #FFB74D;
+  --accent-color: #795548;
+  --text-color: #333;
+  --max-width: 800px;
+  --font-family: 'Rubik', cursive;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--primary-color);
+  padding: 20px;
+}
+
+.formContainer {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.addButton {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 20px;
+
+  background: linear-gradient(to right, #85655a, #795548);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  margin: 10px;
+  margin-right: 25px;
+}
+
+.addButton:hover {
+  background: linear-gradient(to right, #F57C00, #E65100);
+  transform: translateY(-2px);
+}
+
+.noFriends {
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--primary-color);
+  padding: 15px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.select {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  color: var(--text-color);
+  background-color: white;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+

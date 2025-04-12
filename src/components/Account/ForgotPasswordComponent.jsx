@@ -1,14 +1,11 @@
 import style from "./ForgotPasswordComponent.module.css";
 import ForgotPasswordFormComponent from "../Account/ForgotPasswordFormComponent";
-import ImageStartComponent from "../ImageStartComponent";
 import FooterComponent from "../FooterComponent";
 
-function ForgotPasswordComponent({ image }) {
+function ForgotPasswordComponent() {
     return (
-        <div className={style.main}>
-            <hr />
-            <div className={style.container}>
-                <ImageStartComponent image={image} />
+        <div className={style.container}>
+            <div className={style.main}>
                 <ForgotPasswordFormComponent />
             </div>
             <FooterComponent />

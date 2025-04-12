@@ -1,0 +1,121 @@
+.mainPhotoContainer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.currentPhoto {
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(255, 152, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.menuContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.menuButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ff9800;
+}
+
+.menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ffcc80;
+    border-radius: 5px;
+    padding: 5px 0;
+    box-shadow: 0 2px 5px rgba(255, 152, 0, 0.2);
+    z-index: 10;
+    min-width: 150px;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu button:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}
+
+.photoCarousel {
+    display: flex;
+    overflow-x: hidden;
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ffb74d;
+    cursor: grab;
+    justify-content: center;
+}
+
+.photoCarousel:active {
+    cursor: grabbing;
+}
+
+.carouselImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    flex-shrink: 0;
+}
+
+.activeCarouselImage {
+    border-color: #ff9800;
+}
+
+.noPhotosContainer {
+    text-align: center;
+    padding: 40px; 
+    border: 2px solid #ffcc80; 
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #fffaf0;
+}
+
+.noPhotosContainer div {
+    margin-bottom: 20px; 
+    font-size: 20px;
+}
+
+.noPhotosContainer button {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+}
+
+.noPhotosContainer button:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}

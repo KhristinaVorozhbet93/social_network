@@ -1,0 +1,105 @@
+:root {
+    --primary-color: #795548;
+    --secondary-color: #FFB74D;
+    --text-color: #333;
+    --background-color: #f8efe4;
+    --message-color: #e0d8c7;
+    --my-message-color: #D1C0B0;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.messages {
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    height: 500px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: var(--message-color);
+    word-wrap: break-word;
+}
+
+.messageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.messageAuthor {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #795548
+}
+
+.messageTime {
+    font-size: 0.8em;
+    color: #795548;
+}
+
+.messageContent {
+    position: relative;
+    color: black;
+}
+
+.messageInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-right: 10px;
+    font-size: 1em;
+    resize: none;
+    height: 38px;
+}
+
+.sendButton {
+    background: linear-gradient(to right, #FFCC80, #FFB74D);
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+    margin-right: 25px;
+}
+
+.sendButton:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}
+
+.messageActions {
+    display: flex;
+    gap: 5px;
+}
+
+.message.myMessage {
+    background-color: var(--my-message-color);
+    align-self: flex-end;
+}
+
+.message.otherMessage {
+    background-color: var(--message-color);
+    align-self: flex-start;
+}
+
+.newMessage {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}

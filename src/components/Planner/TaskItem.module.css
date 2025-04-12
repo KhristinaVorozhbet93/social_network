@@ -1,0 +1,106 @@
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #777;
+  ;
+  font-size: 20px;
+  color: #333;
+}
+
+.editContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editInput {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 20px;
+  width: 400px;
+}
+
+.taskText {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.menuContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.menuIcon {
+  cursor: pointer;
+  font-size: 20px;
+  color: #ff9800;
+}
+
+.menuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  padding-right: 5px;
+  ;
+}
+
+.menuDropdown button {
+  border: none;
+  padding: 14px 20px;
+  background: none;
+  text-align: left;
+  left: 0;
+  cursor: pointer;
+  color: #333;
+  font-size: 15px;
+}
+
+.menuDropdown button:hover {
+  background: linear-gradient(to right, #F57C00, #E65100);
+  transform: translateY(-2px);
+}
+
+.editButtons {
+  margin-top: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  background: linear-gradient(to right, #FFCC80, #FFB74D);
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover,
+.cancelButton:hover {
+  background: linear-gradient(to right, #F57C00, #E65100);
+  transform: translateY(-2px);
+}
+
+.disabledButton {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.disabledButton:hover {
+  background: linear-gradient(to right, #F57C00, #E65100) !important;
+  transform: translateY(-2px); 
+}

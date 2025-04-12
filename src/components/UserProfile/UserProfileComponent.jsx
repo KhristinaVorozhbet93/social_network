@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import style from './UserProfileComponent.module.css';
-import HeaderComponent from "../HeaderComponent";
-import AsideComponent from "../AsideComponent";
-import FooterComponent from "../FooterComponent";
 import { useAccountApi } from '../../App';
-import UpdateUserProfileComponent from './UpdateUserProfileComponent';
+import { useNavigate } from 'react-router-dom';
+import UserPhotoAlbum from './UserPhotoAlbum';
+import ContentContainer from '../ContentContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { parseISO, format, isValid } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
 function UserProfileComponent() {
     const
         [profile, setProfile] = useState(null),
         [loading, setLoading] = useState(true),
-        [isEditMode, setIsEditMode] = useState(false),
-        [editedProfile, setEditedProfile] = useState(null),
-        [selectedFile, setSelectedFile] = useState(null),
-        accountApi = useAccountApi();
+        [isMenuOpen, setIsMenuOpen] = useState(false),
+        [friends, setFriends] = useState([]),
+        navigate = useNavigate(),
+        accountApi = useAccountApi(),
+        profileId = localStorage.getItem('profileId');
 
     useEffect(() => {
         const fetchProfile = async () => {
             setLoading(true);
             try {
-                const accountId = localStorage.getItem('accountId');
-                const data = await accountApi.getUserProfile(accountId);
+                const profileId = localStorage.getItem('profileId');
+                const data = await accountApi.getUserProfileById(profileId);
+                const response = await accountApi.getFriends(profileId);
+                setFriends(response);
                 setProfile(data);
-            }
-            catch (error) {
-                console.error("Failed to fetch user profile", error)
             }
             finally {
                 setLoading(false);
@@ -33,39 +36,35 @@ function UserProfileComponent() {
         fetchProfile();
     }, []);
 
-    const handleEditClick = () => {
-        setIsEditMode(true);
-        setEditedProfile({ ...profile });
-        setSelectedFile(null);
-    };
+    function formatDate(dateString) {
+        const parsedDate = parseISO(dateString);
 
-    const handleEditProfileChange = (e) => {
-        setEditedProfile({ ...editedProfile, [e.target.name]: e.target.value });
-    };
-
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-    };
-
-    const handleEditProfile = async () => {
-        try {
-            if (selectedFile) {
-                editedProfile.photo = selectedFile;
-            }
-            const updatedProfile = await accountApi.updateUserProfile(editedProfile);
-            setProfile(updatedProfile);
-            setIsEditMode(false);
-            setEditedProfile(null);
-            setSelectedFile(null);
-        } catch (error) {
-            console.error("Failed to update user profile:", error);
+        if (!isValid(parsedDate)) {
+            console.error(`Invalid date string: ${dateString}`);
+            return "Invalid Date";
         }
+
+        return format(parsedDate, 'dd.MM.yyyy', { locale: ru });
+    }
+
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen);
     };
-    
-    const handleCancelEdit = () => {
-        setIsEditMode(false);
-        setEditedProfile(null);
-        setSelectedFile(null);
+
+    const handleEditClick = () => {
+        navigate("/profile/user/update");
+    };
+
+    const handleDeleteClick = () => {
+        navigate("/profile/user/update");
+    };
+
+    const navigateToGallery = () => {
+        navigate(`/profile/user/${profileId}/photos`);
+    };
+
+    const navigateToFriends = () => {
+        navigate('/friends');
     };
 
     if (loading) {
@@ -73,35 +72,115 @@ function UserProfileComponent() {
     }
 
     return (
-        <div className={style.container}>
-            <HeaderComponent />
-            <div className={style.content}>
-                <AsideComponent />
-                <div className={style.main_content}>
-                    {isEditMode ? (
-                        <UpdateUserProfileComponent
-                            editedProfile={editedProfile}
-                            handleEditProfileChange={handleEditProfileChange}
-                            handleFileChange={handleFileChange}
-                            handleEditProfile={handleEditProfile}
-                            handleCancelEdit={handleCancelEdit}
-                            selectedFile={selectedFile}
-                        />
-                    ) : (
-                        <div className={style.formContent} >
-                            {profile.photo && <img src={profile.photo} alt="User Profile" style={{ maxWidth: '100px' }} />}
-                            <p>Имя: {profile.firstName}</p>
-                            <p>Фамилия: {profile.lastName}</p>
-                            <p>Дата рождения: {profile.dateOfBirth?.split('T')[0]}</p>
-                            <p>Гуляет с собаками: {profile.walksDogs ? 'Да' : 'Нет'}</p>
-                            <p>Профессия: {profile.profession}</p>
-                            <button onClick={handleEditClick}>Редактировать</button>
+        <ContentContainer>
+            <div className={style.formContent}>
+                <section>
+                    <h2 className={style.galleryHeading}>Профиль</h2>
+                    <div className={style.profileContainer}>
+                        <div className={style.profilePhotoAndInfo}>
+                            <img
+                                src={profile.photoUrl}
+                                alt="User Profile"
+                                className={style.profilePhoto}
+                            />
+
+                            <div className={style.profileInfo}>
+                                <div className={style.profileInfoRow}>
+                                    <span>Имя:</span> <span>{profile.firstName}</span>
+                                </div>
+                                <div className={style.profileInfoRow}>
+                                    <span>Фамилия:</span> <span>{profile.lastName}</span>
+                                </div>
+                                {profile.dateOfBirth && (
+                                    <div className={style.profileInfoRow}>
+                                        <span>Дата рождения:</span> <span>{formatDate(profile.dateOfBirth)}</span>
+                                    </div>
+                                )}
+                                {/* {profile.walksDogs !== null && (
+                                    <div className={style.profileInfoRow}>
+                                        <span>Гуляет с собаками:</span> <span>{profile.walksDogs ? 'Да' : 'Нет'}</span>
+                                    </div>
+                                )} */}
+                                {profile.profession && (
+                                    <div className={style.profileInfoRow}>
+                                        <span>Профессия:</span> <span>{profile.profession}</span>
+                                    </div>
+                                )}
+                                {profile.aboutSelf && (
+                                    <div className={style.profileInfoRow}>
+                                        <span>О себе:</span> <p>{profile.aboutSelf}</p>
+                                    </div>
+                                )}
+                                {profile.interests && (
+                                    <div className={style.profileInfoRow}>
+                                        <span>Интересы:</span> <p>{profile.interests}</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    )}
-                </div>
+
+                        <div className={style.menuContainer}>
+                            <FontAwesomeIcon
+                                icon={faEllipsisV}
+                                onClick={handleMenuClick}
+                                className={style.menuIcon}
+                            />
+                            {isMenuOpen && (
+                                <div className={style.menuDropdown}>
+                                    <button onClick={handleEditClick}>Редактировать</button>
+                                    <button onClick={handleDeleteClick}>Удалить</button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+
+                <section className={style.gallerySection}>
+                    <div className={style.headerContainer}>
+                        <h2 className={style.galleryHeading} onClick={() => navigateToGallery()}>Галерея</h2>
+                        <div className={style.buttonContainer}>
+                            <button onClick={() => navigateToGallery()} className={style.viewAllButton}>
+                                Просмотр галереи
+                            </button>
+                        </div>
+                    </div>
+                    <UserPhotoAlbum id={profile.id} />
+                </section>
+
+                <section>
+                    <div className={style.headerContainer}>
+                        <h2 className={style.galleryHeading} onClick={() => navigateToFriends()}>Друзья</h2>
+                        <div className={style.buttonContainer}>
+                            <button onClick={() => navigateToFriends()} className={style.viewAllButton}>
+                                Просмотр друзей
+                            </button>
+                        </div>
+                    </div>
+                    <div className={style.friendsListContainer}>
+                        {friends.length === 0 ? (
+                            <div className={style.noPhotosContainer}>
+                                <div className={style.noPhotosText}>У вас пока нет друзей</div>
+                            </div>
+                        ) : (
+                            <ul className={style.friendsList}>
+                                {friends.slice(0, 6).map((friend, index) => (
+                                    <li key={friend.id} onClick={() => navigateToFriends()} className={style.friendItem}>
+                                        {friend.photoUrl && (
+                                            <img
+                                                src={friend.photoUrl}
+                                                alt={`${friend.firstName} ${friend.lastName}`}
+                                                className={style.friendPhoto}
+                                                style={{ width: `${100 - index * 10}%`, height: `${100 - index * 10}%` }}
+                                            />
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </section>
             </div>
-            <FooterComponent />
-        </div>
+        </ContentContainer>
     );
 }
 

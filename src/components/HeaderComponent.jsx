@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './HeaderComponent.module.css'
-import PawComponent from './Paw/PawComponent';
+import exitIcon from '../images/exit.png';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/logo.png'; 
 
 function HeaderComponent() {
      const navigate = useNavigate();
@@ -17,11 +18,12 @@ function HeaderComponent() {
   };
 
   return (
-    <header className={style.container}>
-      <PawComponent />
-      <button className={style.text} onClick={handleOnMainPageClick}>Дай лапу</button>
+    <header className={style.container}>   
+      <button className={`${style.text} ${style.logo_text}`} onClick={handleOnMainPageClick}>Дай лапу</button>
+      <img src={logo} alt="Логотип" className={style.logo} onClick={handleOnMainPageClick}/>
          <div className={style.exit}>
-                <button className={style.text} onClick={handleLogout}>Выход</button>
+                <button className={`${style.text} ${style.exit_text}`} onClick={handleLogout}>Выход</button>
+                <img src={exitIcon} alt="Exit Icon" className={style.icon} />
             </div>
     </header>
   );

@@ -1,0 +1,73 @@
+:root {
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --text-color: #333;
+}
+
+.photoUploadForm {
+    border: 2px solid #ffcc80;
+    border-radius: 12px;
+    padding: 40px;
+    margin: 30px auto;
+    min-height: 300px;
+    box-shadow: 0 6px 12px rgba(255, 152, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.photoUploadForm input[type="file"] {
+    margin-bottom: 40px;
+    padding: 18px;
+    border: 2px dashed #ffcc80;
+    border-radius: 8px;
+    font-size: 20px;
+    width: 80%;
+    box-sizing: border-box;
+    color: var(--text-color);
+    background-color: #fffaf0;
+}
+
+.photoUploadForm input[type="file"]::file-selector-button {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+    margin-right: 25px;
+}
+
+.photoUploadForm input[type="file"]::file-selector-button:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}
+
+.formButtons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.photoUploadForm button {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+}
+
+.photoUploadForm button:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}

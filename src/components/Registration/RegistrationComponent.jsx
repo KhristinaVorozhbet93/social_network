@@ -1,14 +1,11 @@
 import RegistrationFormComponent from "./RegistrationFormComponent";
 import style from "./Registration.module.css";
-import ImageStartComponent from "../ImageStartComponent";
 import FooterComponent from "../FooterComponent";
 
-function RegistrationComponent({ image }) {
+function RegistrationComponent() {
     return (
-        <div className={style.main}>
-            <hr />
-            <div className={style.container}>
-                <ImageStartComponent />
+        <div className={style.container}>
+            <div className={style.main}>
                 <RegistrationFormComponent />
             </div>
             <FooterComponent />

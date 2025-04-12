@@ -1,58 +1,77 @@
-import React, { useState, useEffect } from "react";
-import style from "./Login.module.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import style from './Login.module.css';
+import { Snackbar, Alert, CircularProgress } from '@mui/material';
 import { useAccountApi } from '../../App';
-import PawComponent from "../Paw/PawComponent";
 
-function LoginFormComponent () {
-    const
-        [email, setEmail] = useState(''),
-        [password, setPassword] = useState(''),
-        [passwordError, setPasswordError] = useState(false),
-        [errorMessage, setErrorMessage] = useState(""),
-        accountApi = useAccountApi(),      
-        navigate = useNavigate();
+function LoginFormComponent() {
+  const
+    [email, setEmail] = useState(''),
+    [password, setPassword] = useState(''),
+    [isLoading, setIsLoading] = useState(false),
+    [snackbarOpen, setSnackbarOpen] = useState(false),
+    [snackbarMessage, setSnackbarMessage] = useState(''),
+    accountApi = useAccountApi(),
+    navigate = useNavigate();
 
   const submitAuthentificationData = async (e) => {
     e.preventDefault();
 
-    try {
-        if (password && email) {
-            const response = await accountApi.login(email, password);
-            localStorage.setItem('authToken', response.token);
-            localStorage.setItem('accountId', response.id);
-            setPasswordError(false);
-            navigate("/profile/user");
-        } else {
-            setErrorMessage("Заполните все поля");
-            setPasswordError(true);
-        }
-    } catch (error) {
-        setErrorMessage(error.message);
-        setPasswordError(true);
-    }
-}
+    setIsLoading(true);
 
-const handleRegistrationClick = async (e) => {
+    try {
+      if (password && email) {
+        const response = await accountApi.login(email, password);
+        localStorage.clear();
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('accountId', response.id);
+        const profile = await accountApi.getUserProfile(response.id);
+        localStorage.setItem('profileId', profile.id);
+        setIsLoading(false);
+        navigate("/profile/user");
+      } else {
+        setIsLoading(false);
+        showSnackbar("Заполните все поля", "error");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      showSnackbar(error.message, "error");
+    }
+  }
+
+  const handleRegistrationClick = async (e) => {
     e.preventDefault();
     navigate("/auth/registration");
-}
+  }
 
-const handleForgotPasswordClick = async (e) => {
+  const handleForgotPasswordClick = async (e) => {
     e.preventDefault();
     navigate("/auth/password");
-}
+  }
 
-useEffect(() => {
-  return () => {
+  const showSnackbar = (message) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  }
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
   };
-}, []);
+
+
+  useEffect(() => {
+    return () => {
+    };
+  }, []);
+
   return (
     <div className={`${style.registration} ${style.box}`}>
-      <PawComponent/>
       <p className={`${style.text} ${style.text_size}`}>ДАЙ ЛАПУ</p>
       <p className={style.text}>Вход</p>
-  
+
       <hr className={style.line} />
       <form onSubmit={submitAuthentificationData}>
         <div>
@@ -75,17 +94,9 @@ useEffect(() => {
             required
           />
         </div>
-        <div>
-          <label
-            className={style.hidden_field}
-            id="incorrectData"
-            hidden={!passwordError}
-          >
-            {errorMessage}
-          </label>
-        </div>
-        <button className={style.button_form} type="submit">
-          Войти
+
+        <button className={style.button_form} type="submit" disabled={isLoading}>
+          {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Войти'}
         </button>
       </form>
 
@@ -105,7 +116,18 @@ useEffect(() => {
           Регистрация
         </button>
       </div>
-      <PawComponent/>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        className={style.snackbar}
+      >
+        <Alert onClose={handleSnackbarClose} severity="error" sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

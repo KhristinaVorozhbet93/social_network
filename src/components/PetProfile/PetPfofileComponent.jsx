@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import style from './PetPfofileComponent.module.css';
-import PetProfileFormComponent from './PetProfileFormComponent';
-import HeaderComponent from '../HeaderComponent';
-import AsideComponent from '../AsideComponent';
-import FooterComponent from '../FooterComponent';
 import { useAccountApi } from '../../App';
-import UpdatePetProfileComponent from './UpdatePetProfileComponent';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import PetPhotoAlbum from './PetPhotoAlbum';
+import ContentContainer from '../ContentContainer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { Snackbar, Alert, CircularProgress } from '@mui/material';
 
 function PetProfileComponent() {
     const
         [profiles, setProfiles] = useState([]),
         [activeProfileIndex, setActiveProfileIndex] = useState(0),
-        [isFormVisible, setIsFormVisible] = useState(false),
-        [isEditMode, setIsEditMode] = useState(false),
         [loading, setLoading] = useState(false),
-        [editedProfile, setEditedProfile] = useState(null),
-        [selectedFile, setSelectedFile] = useState(null),
+        [snackbarOpen, setSnackbarOpen] = useState(false),
+        [snackbarMessage, setSnackbarMessage] = useState(''),
+        [snackbarSeverity, setSnackbarSeverity] = useState('success'),
+        [isMenuOpen, setIsMenuOpen] = useState(false),
+        [accountId, setAccountId] = useState([]),
         navigate = useNavigate(),
-        accountApi = useAccountApi();
+        accountApi = useAccountApi(),
+        profileId = localStorage.getItem('profileId');
 
     useEffect(() => {
         const fetchProfiles = async () => {
             setLoading(true);
             try {
-                const accountId = localStorage.getItem('accountId');
-                const data = await accountApi.getPetProfiles(accountId);
-                setProfiles(data);
+
+                setAccountId(accountId);
+                const data = await accountApi.getPetProfiles(profileId);
+                if (data && data.length > 0) {
+                    setProfiles(data);
+                }
             } finally {
                 setLoading(false);
             }
@@ -34,23 +39,38 @@ function PetProfileComponent() {
         fetchProfiles();
     }, []);
 
-    const handleAddProfileClick = () => {
-        setIsFormVisible(true);
+    const handleDeleteProfile = async (id, index) => {
+        setLoading(true);
+        try {
+            await accountApi.deletePetProfile(id, accountId);
+            setSnackbarSeverity('success');
+            setSnackbarMessage('Профиль успешно удален');
+            setSnackbarOpen(true);
+            setTimeout(() => {
+                navigate('/profile/pet');
+            }, 3000);
+
+            const newProfiles = [...profiles];
+            newProfiles.splice(index, 1);
+            setProfiles(newProfiles);
+            if (activeProfileIndex >= newProfiles.length) {
+                setActiveProfileIndex(newProfiles.length - 1);
+            }
+        }
+        finally {
+            setLoading(false);
+        }
     };
 
-    const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
     };
 
-    const handleEditFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-    };
-
-    const handleSaveProfile = async (newProfile) => {
-        const data = await accountApi.saveProfile(newProfile);
-        setProfiles([...profiles, data]);
-        setIsFormVisible(false);
-        setActiveProfileIndex(profiles.length);
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen);
     };
 
     const handleTabClick = (index) => {
@@ -58,105 +78,130 @@ function PetProfileComponent() {
     };
 
     const handleAddTab = () => {
-        setIsFormVisible(true);
-        setActiveProfileIndex(profiles.length);
+        navigate('/profile/pet/create');
     };
 
     const handleEditClick = (profile) => {
-        setIsEditMode(true);
-        setEditedProfile({ ...profile });
+        navigate(`/profile/pet/${profile.id}/update`);
     };
 
-    const handleEditProfileChange = (e) => {
-        setEditedProfile({ ...editedProfile, [e.target.name]: e.target.value });
+    const navigateToGallery = () => {
+        navigate(`/profile/pet/${currentProfile.id}/photos`, { state: { userProfileId: profileId } });
     };
 
-    const handleEditProfile = async () => {
-        const updatedProfile = await accountApi.updatePetProfile(editedProfile)
-        const newProfiles = profiles.map((profile) => profile.id === updatedProfile.id ? updatedProfile : profile)
-        setProfiles(newProfiles)
-        setIsEditMode(false);
-        setEditedProfile(null);
-    };
-
-    const handleCancelEdit = () => {
-        navigate("/profile/pet");
-    };
-
-    const handleDeleteProfile = async (id, index) => {
-        await accountApi.deletePetProfile(id);
-        const newProfiles = [...profiles];
-        newProfiles.splice(index, 1);
-        setProfiles(newProfiles);
-        if (activeProfileIndex >= newProfiles.length) {
-            setActiveProfileIndex(newProfiles.length - 1);
-        }
-    };
-
-    if (loading) {
-        return <div>Loading...</div>;
+    if (!profiles || profiles.length === 0) {
+        return (
+            <ContentContainer>
+                <div className={style.addProfile}>
+                    <div>Нет питомцев</div>
+                    <button onClick={handleAddTab} >Добавить</button>
+                </div>
+            </ContentContainer>
+        );
     }
 
+    const currentProfile = profiles[activeProfileIndex];
     return (
-        <div className={style.container}>
-            <HeaderComponent />
-            <div className={style.content}>
-                <AsideComponent />
-                <div className={style.main_content}>
-                    {profiles.length > 0 ? (
-                        <div className={style.tabs}>
-                            {profiles.map((profile, index) => (
-                                <div
-                                    key={index}
-                                    className={`${style.tab} ${index === activeProfileIndex ? style.activeTab : ''}`}
-                                    onClick={() => handleTabClick(index)}
-                                >
-                                    {profile.name}
-                                </div>
-                            ))}
-                            <div className={style.tab} onClick={handleAddTab}>+</div>
-                        </div>
-                    ) : null}
-                    <div className={style.tabContent}>
-                        {profiles[activeProfileIndex] ? (
-                            isEditMode ? (
-                                <UpdatePetProfileComponent
-                                    editedProfile={editedProfile}
-                                    handleEditProfileChange={handleEditProfileChange}
-                                    handleEditFileChange={handleEditFileChange}
-                                    handleEditProfile={handleEditProfile}
-                                    handleCancelEdit={handleCancelEdit}
-                                    selectedFile={selectedFile}
-                                />
-                            ) : (
-                                <div className={style.formContent} >
-                                    <p>Имя животного: {profiles[activeProfileIndex].name}</p>
-                                    <p>Тип животного: {profiles[activeProfileIndex].type}</p>
-                                    <p>Возраст животного: {profiles[activeProfileIndex].years}</p>
-                                    <p>Пол животного: {profiles[activeProfileIndex].gender}</p>
-                                    <p>Описание животного: {profiles[activeProfileIndex].description}</p>
-                                    {profiles[activeProfileIndex].photo && <img src={profiles[activeProfileIndex].photo} alt="Pet Profile" style={{ maxWidth: '100px' }} />}
-                                    <button onClick={() => handleEditClick(profiles[activeProfileIndex])}>Редактировать</button>
-                                    <button onClick={() => handleDeleteProfile(profiles[activeProfileIndex].id, activeProfileIndex)}>Удалить</button>
-                                </div>
-                            )
-                        ) : (
-                            !isFormVisible ? (
-                                <div className={style.initialView}>
-                                    <button className={style.addButton} onClick={handleAddProfileClick}>
-                                        + Добавить профиль животного
-                                    </button>
-                                </div>
-                            ) : (
-                                <PetProfileFormComponent onSave={handleSaveProfile} handleFileChange={handleFileChange} setIsFormVisible={setIsFormVisible} />
-                            )
-                        )
-                        }
+        <ContentContainer>
+            <div className={style.tabs}>
+                {profiles.map((profile, index) => (
+                    <div
+                        key={profile.id}
+                        className={`${style.tab} ${index === activeProfileIndex ? style.activeTab : ''}`}
+                        onClick={() => {
+                            handleTabClick(index);
+                            setActiveProfileIndex(index);
+                        }}
+                    >
+                        {profile.name}
                     </div>
+                ))}
+                <div className={style.tab} onClick={handleAddTab}>+</div>
+            </div>
+
+            <div className={style.tabContent}>
+                <div className={style.formContent}>
+                    <section>
+                        <h2 className={style.galleryHeading}>Профиль</h2>
+                        <div className={style.profileContainer}>
+                            <div className={style.profilePhotoAndInfo}>
+                                {currentProfile && (
+                                    <>
+                                        {profiles[activeProfileIndex].photoUrl && (
+                                            <img
+                                                src={profiles[activeProfileIndex].photoUrl}
+                                                alt={`Фото ${profiles[activeProfileIndex].name}`}
+                                                className={style.profilePhoto}
+                                            />
+                                        )}
+                                        <div>
+                                            {profiles.length > 0 && (
+                                                <>
+                                                    {profiles[activeProfileIndex].name && (
+                                                        <p>Имя животного: {profiles[activeProfileIndex].name}</p>
+                                                    )}
+                                                    {profiles[activeProfileIndex].type && (
+                                                        <p>Тип животного: {profiles[activeProfileIndex].type}</p>
+                                                    )}
+                                                    {profiles[activeProfileIndex].age && (
+                                                        <p>Возраст животного: {profiles[activeProfileIndex].age}</p>
+                                                    )}
+                                                    {profiles[activeProfileIndex].gender && (
+                                                        <p>Пол животного: {profiles[activeProfileIndex].gender}</p>
+                                                    )}
+                                                    {profiles[activeProfileIndex].description && (
+                                                        <p>Описание животного: {profiles[activeProfileIndex].description}</p>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className={style.menuContainer}>
+                                <FontAwesomeIcon
+                                    icon={faEllipsisV}
+                                    onClick={handleMenuClick}
+                                    className={style.menuIcon}
+                                />
+                                {isMenuOpen && (
+                                    <div className={style.menuDropdown}>
+                                        <button onClick={() => handleEditClick(currentProfile)}>Редактировать</button>
+                                        <button onClick={() => handleDeleteProfile(currentProfile.id, activeProfileIndex)} disabled={loading}>
+                                            {loading ? <CircularProgress size={24} color="inherit" /> : 'Удалить'}
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className={style.gallerySection}>
+                        <div className={style.headerContainer}>
+                            <h2 className={style.galleryHeading} onClick={() => navigateToGallery()}>Галерея</h2>
+                            <div className={style.buttonContainer}>
+                                <button onClick={() => navigateToGallery()} className={style.viewAllButton}>
+                                    Просмотр галереи
+                                </button>
+                            </div>
+                        </div>
+                        {currentProfile && <PetPhotoAlbum id={currentProfile.id} userProfileId={profileId} />}
+                    </section>
                 </div>
             </div>
-            <FooterComponent />
-        </div>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                className={style.snackbar}
+            >
+                <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+        </ContentContainer>
     );
 }
 

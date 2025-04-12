@@ -1,0 +1,72 @@
+:root {
+    --max-width: 800px;
+    --background-color: #f5f5dc;
+    --text-color: #333;
+}
+
+.albumContainer {
+    width: 93%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    justify-content: center;
+}
+
+.photoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.photo:hover {
+    transform: scale(1.05);
+}
+
+.noPhotosContainer {
+    text-align: center;
+    padding: 20px;
+    border: 1px dashed #aaa;
+    width: 100%;
+}
+
+.noPhotosText {
+    color: var(--text-color);
+    font-size: 20px;
+}
+
+.addButton {
+    background: linear-gradient(to right, #FFCC80, #FFB74D);
+    color: var(--text-color);
+    border: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+    font-size: 20px;
+}
+
+.addButton :hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}

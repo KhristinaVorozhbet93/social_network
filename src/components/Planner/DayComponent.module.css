@@ -1,0 +1,85 @@
+.day_view {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+  background: rgba(247, 235, 218, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.day_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.day_header h3 {
+  margin: 0;
+  font-size: 30px;
+  color: #795548;;
+  margin-left: 20px;
+}
+
+.day_header button {
+  background: linear-gradient(to right, #FFCC80, #FFB74D);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.2s ease;
+  color: #333;
+}
+
+.day_header button:hover {
+  background: linear-gradient(to right, #F57C00, #E65100);
+  transform: translateY(-2px);
+}
+
+.day_content_expanded {
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+.task_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; 
+  overflow-y: auto;  
+}
+
+.add_task_container {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.add_task_input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.add_task_button {
+  background: linear-gradient(to right, #FFCC80, #FFB74D);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.2s ease;
+  color: #333;
+}
+
+.add_task_button:hover {
+  background: linear-gradient(to right, #F57C00, #E65100);
+  transform: translateY(-2px);
+}
