@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ContentContainer from "../ContentContainer";
-import style from '../Friends/FriendsListComponent.module.css';
+import style from '../Friends/FriendsComponent.module.css';
 import { useAccountApi } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";
 

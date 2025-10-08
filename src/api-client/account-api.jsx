@@ -74,6 +74,11 @@ class BaseApiClient {
         }
     }
 
+
+
+
+
+
     async resetPassword(email, password) {
         try {
             const uri = "api/Auth/ResetPassword";
@@ -157,6 +162,9 @@ class BaseApiClient {
 
 
 
+
+
+
     async saveProfile(newProfile) {
         try {
             const uri = "api/PetProfile/AddPetProfile";
@@ -205,7 +213,7 @@ class BaseApiClient {
     async deletePetProfile(petId, accountId) {
         try {
             const uri = "api/PetProfile/DeletePetProfile";
-            var response = await axios.delete(`${this.host}${uri}?petId=${petId}&accountId=${accountId}`);
+            var response = await axios.delete(`${this.host}${uri}?petId=${petId}`);
             return response.data;
         }
         catch (error) {
@@ -389,11 +397,19 @@ class BaseApiClient {
     }
 
 
+
     //photos
     async getPetPhotoInAlbum(profileId, petId) {
         try {
             const uri = "api/PetPhoto/BySearch";
-            var response = await axios.get(`${this.host}${uri}?petId=${petId}&profileId=${profileId}`);
+            const response = await axios.post(`${this.host}${uri}`, {
+                profileId: profileId,
+                petId: petId,
+                options: {
+                    take: 10,
+                    offset: 0
+                }
+            });
             return response.data;
         }
         catch (error) {
@@ -405,11 +421,19 @@ class BaseApiClient {
         }
     }
 
+
     //photos
-    async getUserPhotosInAlbum(profileId) {
+    async getUserPhotosInAlbum(profileId, take, offset) {
         try {
             const uri = "api/PersonalPhoto/BySearch";
-            var response = await axios.get(`${this.host}${uri}?profileId=${profileId}`);
+            const response = await axios.post(`${this.host}${uri}`,
+                {
+                    profileId: profileId,
+                    options: {
+                        take: take,
+                        offset: offset
+                    }
+                });
             return response.data;
         }
         catch (error) {
@@ -420,6 +444,7 @@ class BaseApiClient {
             }
         }
     }
+
 
 
 
@@ -428,10 +453,19 @@ class BaseApiClient {
 
 
     //friends
-    async findFriends(firstName, LastName) {
+    async findFriends(firstName, lastName) {
         try {
             const uri = "api/UserProfile/FindUserProfileByName";
-            var response = await axios.get(`${this.host}${uri}?firstName=${firstName}&lastName=${LastName}`);
+            var response = await axios.post(`${this.host}${uri}`,
+                {
+                    firstName: firstName,
+                    lastName: lastName,
+                    options: {
+                        take: 10,
+                        offset: 0
+                    }
+                }
+            );
             return response.data;
         }
         catch (error) {
@@ -449,7 +483,15 @@ class BaseApiClient {
     async getFriends(userId) {
         try {
             const uri = "api/FriendShip/GetFriendsWithInfo";
-            var response = await axios.get(`${this.host}${uri}?userId=${userId}`);
+
+            const response = await axios.post(`${this.host}${uri}`,
+                {
+                    userId: userId,
+                    options: {
+                        take: 10,
+                        offset: 0
+                    }
+                });
             return response.data;
         }
         catch (error) {
@@ -515,7 +557,15 @@ class BaseApiClient {
     async getSentFriendRequests(userId) {
         try {
             const uri = "api/FriendShip/GetSentRequest";
-            const response = await axios.get(`${this.host}${uri}?userId=${userId}`);
+            const response = await axios.post(`${this.host}${uri}`,
+                {
+                    userId: userId,
+                    options:
+                    {
+                        take: 10,
+                        offset: 0
+                    }
+                });
             return response.data;
         }
         catch (error) {
@@ -531,7 +581,14 @@ class BaseApiClient {
     async getReceivedFriendRequests(userId) {
         try {
             const uri = "api/FriendShip/GetReceivedRequest";
-            const response = await axios.get(`${this.host}${uri}?userId=${userId}`);
+            const response = await axios.post(`${this.host}${uri}`, {
+                userId: userId,
+                options:
+                {
+                    take: 10,
+                    offset: 0
+                }
+            });
             return response.data;
         }
         catch (error) {
@@ -585,7 +642,12 @@ class BaseApiClient {
     async hasSentRequest(userId, frinedId) {
         try {
             const uri = "api/FriendShip/HasSentRequest";
-            var response = await axios.get(`${this.host}${uri}?userId=${userId}&friendId=${frinedId}`);
+            var response = await axios.post(`${this.host}${uri}`,
+                {
+                    userId: userId,
+                    friendId: frinedId
+                }
+            );
             return response.data;
         }
         catch (error) {
@@ -620,7 +682,14 @@ class BaseApiClient {
     async getCommentsForPhoto(photoId) {
         try {
             const uri = "api/Comment/GetAllCommentToPhoto";
-            var response = await axios.get(`${this.host}${uri}?photoId=${photoId}`);
+            const response = await axios.post(`${this.host}${uri}`, {
+                photoId: photoId,
+                options:
+                {
+                    take: 10,
+                    offset: 0
+                }
+            });
             return response.data;
         }
         catch (error) {
@@ -713,7 +782,15 @@ class BaseApiClient {
     async getChats(userId) {
         try {
             const uri = "api/Chat/BySearch";
-            var response = await axios.get(`${this.host}${uri}?userId=${userId}`);
+            const request = {
+                userId: userId,
+                options: {
+                    take: 10,
+                    offset: 0
+                }
+            };
+
+            const response = await axios.post(`${this.host}${uri}`, request);
             return response.data;
         }
         catch (error) {
@@ -742,10 +819,17 @@ class BaseApiClient {
     }
 
     //chat
-    async getChatMessages(chatId) {
+    async getChatMessages(chatId, take, offset) {
         try {
             const uri = "api/Message/BySearch";
-            var response = await axios.get(`${this.host}${uri}?chatId=${chatId}`);
+            const request = {
+                chatId: chatId,
+                options: {
+                    take: 10,
+                    offset: 0
+                }
+            };
+            const response = await axios.post(`${this.host}${uri}`, request);
             return response.data;
         }
         catch (error) {
@@ -766,7 +850,7 @@ class BaseApiClient {
             const uri = "api/PetPlanner/AddRecord";
             const request = {
                 text: text,
-                date: date, 
+                date: date,
                 profileId: profileId
             };
             const response = await axios.post(`${this.host}${uri}`, request);
@@ -787,9 +871,14 @@ class BaseApiClient {
         try {
             const uri = "api/PetPlanner/GetAllRecordsByDate";
             const request = {
-                date: date, 
-                profileId: profileId
+                date: date,
+                profileId: profileId,
+                options: {
+                    take: 10,
+                    offset: 0
+                }
             };
+
             const response = await axios.post(`${this.host}${uri}`, request);
             return response.data;
         }
@@ -807,9 +896,13 @@ class BaseApiClient {
         try {
             const uri = "api/PetPlanner/GetAllRecordsByPeriod";
             const request = {
-                startDate: startDate, 
-                endDate: endDate, 
-                profileId: profileId
+                startDate: startDate,
+                endDate: endDate,
+                profileId: profileId,
+                options: {
+                    take: 10,
+                    offset: 0
+                }
             };
             const response = await axios.post(`${this.host}${uri}`, request);
             return response.data;

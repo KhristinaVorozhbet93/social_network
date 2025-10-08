@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import style from './ChatFormComponent.module.css';
 import * as signalR from "@microsoft/signalr";
 import { useAccountApi } from '../../App';
@@ -12,17 +12,24 @@ function ChatFormComponent() {
         [profile, setProfile] = useState([]),
         [newMessageText, setNewMessageText] = useState(''),
         [loading, setLoading] = useState(true),
+        [hasMore, setHasMore] = useState(true),
+        [page, setPage] = useState(0),
+        [scrollPosition, setScrollPosition] = useState(0),
         accountApi = useAccountApi(),
         { id: chatId } = useParams(),
         profileId = localStorage.getItem('profileId'),
+        take = 10,
+        observer = useRef(),
+        lastMessageRef = useRef(null),
+        scrollContainerRef = useRef(null),
         connectionRef = useRef(null);
 
     useEffect(() => {
         const buildConnection = () => {
             const newConnection = new signalR.HubConnectionBuilder()
-                .withUrl("https://localhost:7128/chatHub") 
+                .withUrl(process.env.REACT_APP_CHAT_HUB_URL)
                 .withAutomaticReconnect()
-                .configureLogging(signalR.LogLevel.Information)
+                .configureLogging(signalR.LogLevel.Error)
                 .build();
 
             connectionRef.current = newConnection;
@@ -42,25 +49,6 @@ function ChatFormComponent() {
     }, [chatId]);
 
     useEffect(() => {
-        const fetchMessages = async () => {
-            setLoading(true);
-            try {
-                const fetchedMessages = await accountApi.getChatMessages(chatId);
-                setMessages(fetchedMessages);
-                const data = await accountApi.getUserProfileById(profileId);
-                setProfile(data);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (chatId && profileId) {
-            fetchMessages();
-        }
-
-    }, [chatId, profileId, accountApi]);
-
-    useEffect(() => {
         if (connectionRef.current) {
             connectionRef.current.on("ReceiveMessage", (savedMessage) => {
                 console.log("Received message:", savedMessage);
@@ -72,9 +60,10 @@ function ChatFormComponent() {
             return () => {
                 connectionRef.current.off("ReceiveMessage");
             };
+
+
         }
     }, [connectionRef.current, chatId, profileId]);
-
 
     const handleNewMessageChange = (event) => {
         setNewMessageText(event.target.value);
@@ -88,7 +77,7 @@ function ChatFormComponent() {
         if (connectionRef.current) {
             try {
                 const userName = `${profile.firstName} ${profile.lastName}`;
-                await connectionRef.current.invoke("SendMessage", newMessageText, userName, profileId, chatId);
+                await connectionRef.current.invoke("SendMessage", newMessageText, profileId, chatId);
                 setNewMessageText('');
             } catch (error) {
                 console.error("Error sending message:", error);
@@ -96,6 +85,33 @@ function ChatFormComponent() {
             }
         }
     };
+
+    useEffect(() => {
+        fetchMessages();
+    }, [chatId, profileId]);
+
+    const fetchMessages = useCallback(async () => {
+        if (!hasMore) return;
+
+        setLoading(true);
+        try {
+            const fetchedMessages = await accountApi.getChatMessages(chatId, take, page);
+            setMessages(prevMessages => [...prevMessages, ...fetchedMessages]);
+            const data = await accountApi.getUserProfileById(profileId);
+            setProfile(data);
+            setHasMore(fetchedMessages.length > 0);
+            setPage(prevPage => prevPage + 1);
+            if (!profile) {
+                const data = await accountApi.getUserProfileById(profileId);
+                setProfile(data);
+            }
+        } catch (error) {
+            setHasMore(false);
+        } finally {
+            setLoading(false);
+        }
+
+    }, [chatId, profileId, accountApi, page, hasMore, loading, profile]);
 
     if (loading) {
         return <div>Загрузка сообщений...</div>;
@@ -105,11 +121,12 @@ function ChatFormComponent() {
         <ContentContainer>
             <h2>Чат</h2>
             {messages.length > 0 ? (
-                <div className={style.messages}>
+                <div className={style.messages} ref={scrollContainerRef} style={{ overflowY: 'auto', height: '400px' }}>
                     {messages.map((message, index) => (
                         <div
                             key={index}
                             className={`${style.message} ${message.userId === profileId ? style.myMessage : style.otherMessage}`}
+                            ref={index === messages.length - 1 ? lastMessageRef : null}
                         >
                             <div className={style.messageHeader}>
                                 <span className={style.messageAuthor}>
@@ -122,7 +139,7 @@ function ChatFormComponent() {
                             <div className={style.messageContent}>{message.messageText}</div>
                         </div>
                     ))}
-                    <div />
+                    {loading && <p>Загрузка...</p>}
                 </div>
             ) : (
                 <p>Сообщений пока нет.</p>

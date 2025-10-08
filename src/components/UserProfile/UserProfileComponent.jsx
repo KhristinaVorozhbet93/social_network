@@ -25,7 +25,8 @@ function UserProfileComponent() {
             try {
                 const profileId = localStorage.getItem('profileId');
                 const data = await accountApi.getUserProfileById(profileId);
-                const response = await accountApi.getFriends(profileId);
+                const take = 6, offset = 0;
+                const response = await accountApi.getFriends(profileId, take, offset);
                 setFriends(response);
                 setProfile(data);
             }

@@ -9,7 +9,7 @@ import UserProfileComponent from './components/UserProfile/UserProfileComponent'
 import ForgotPasswordComponent from './components/Account/ForgotPasswordComponent';
 import CodeComponent from './components/Account/CodeComponent';
 import PetProfileComponent from './components/PetProfile/PetPfofileComponent';
-import FriendsListComponent from './components/Friends/FriendsListComponent';
+import FriendsListComponent from './components/Friends/FriendsComponent';
 import FriendsSearchComponent from './components/Friends/FriendsSearchComponent';
 import PetProfileFormComponent from './components/PetProfile/PetProfileFormComponent';
 import PetPhotoUploadForm from './components/PetProfile/PetPhotoUploadForm';
@@ -27,6 +27,7 @@ import UserPetsistViewComponent from './components/UserProfile/UserPetsListViewC
 import UpdatePasswordAccount from './components/Account/UpdatePasswordComponent';
 import DayComponent from './components/Planner/DayComponent';
 import Calendar from './components/Planner/Calendar';
+import FriendsComponent from './components/Friends/FriendsComponent';
 
 const AccountApiContext = createContext(null); // Инициализируем createContext с null
 
@@ -93,7 +94,7 @@ function App() {
             <Route path="/profile/pet/create" element={<PetProfileFormComponent />} />           
             <Route path="/profile/pet/:id/update" element={<PetProfileUpdateComponent />} />
 
-            <Route path="/friends" element={<FriendsListComponent />} />
+            <Route path="/friends" element={<FriendsComponent />} />
             <Route path="/friends/search" element={<FriendsSearchComponent />} />
             <Route path="/profile/user" element={<UserProfileComponent />} />
             <Route path="/profile/user/:id/photos" element={<UserProfilePhotoGallery />} />

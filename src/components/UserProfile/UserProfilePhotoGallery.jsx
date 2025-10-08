@@ -30,7 +30,7 @@ function UserProfilePhotoGallery() {
         const fetchPhotos = async () => {
             setLoading(true);
             try {
-                const fetchedPhotos = await accountApi.getUserPhotosInAlbum(id);
+                const fetchedPhotos = await accountApi.getUserPhotosInAlbum(id, 10, 0);
                 setPhotos(fetchedPhotos);
             } finally {
                 setLoading(false);
@@ -66,7 +66,7 @@ function UserProfilePhotoGallery() {
             setSnackbarSeverity('success');
             setSnackbarMessage('Фотогарфия установлена как главная');
             setSnackbarOpen(true);
-            const updatedPhotos = await accountApi.getUserPhotosInAlbum(id);
+            const updatedPhotos = await accountApi.getUserPhotosInAlbum(id, 10, 0);
             setPhotos(updatedPhotos);
         }
         finally {
@@ -81,7 +81,7 @@ function UserProfilePhotoGallery() {
             setSnackbarSeverity('success');
             setSnackbarMessage('Фотогарфия удалена');
             setSnackbarOpen(true);
-            const updatedPhotos = await accountApi.getUserPhotosInAlbum(id);
+            const updatedPhotos = await accountApi.getUserPhotosInAlbum(id, 10, 0);
             setPhotos(updatedPhotos);
             setCurrentPhotoIndex(0);
         } finally {

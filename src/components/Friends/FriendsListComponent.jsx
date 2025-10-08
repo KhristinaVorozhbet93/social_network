@@ -1,36 +1,85 @@
-import { useEffect, useState } from "react";
-import { useAccountApi } from "../../App";
-import { useNavigate } from "react-router-dom";
-import style from './FriendsListComponent.module.css';
-import FriendRequestComponent from "./FriendRequestComponent";
-import FriendsSearchComponent from "./FriendsSearchComponent";
-import ContentContainer from "../ContentContainer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import style from './FriendsComponent.module.css';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAccountApi } from "../../App";
 
-function FriendsListComponent() {
+function FriendsListComponent({ activeTab }) {
     const
         [friends, setFriends] = useState([]),
         [loading, setLoading] = useState(true),
-        [activeTab, setActiveTab] = useState('friends'),
+        [hasMore, setHasMore] = useState(true),
+        [offset, setOffset] = useState(0),
         [isMenuOpen, setIsMenuOpen] = useState(false),
+        take = 100,
         navigate = useNavigate(),
         accountApi = useAccountApi(),
+        containerRef = useRef(null),
         profileId = localStorage.getItem('profileId');
 
     useEffect(() => {
-        const fetchFriends = async () => {
-            try {
-                const profileId = localStorage.getItem('profileId');
-                const response = await accountApi.getFriends(profileId);
-                setFriends(response);
+        setFriends([]);
+        setOffset(0);
+        setHasMore(true);
+        fetchFriends();
 
-            } finally {
-                setLoading(false);
+    }, [activeTab]);
+
+    const fetchFriends = useCallback(async () => {
+        // if (loading || !hasMore) return; // Предотвращаем множественные запросы и загрузку, когда данных больше нет
+        // setLoading(true);
+
+        try {
+            const profileId = localStorage.getItem('profileId');
+            const response = await accountApi.getFriends(profileId, take, offset);
+
+            if (response.length > 0) {
+                setFriends(prevFriends => [...prevFriends, ...response]);
+                setOffset(prevOffset => prevOffset + take);
+            } else {
+                setHasMore(false);
+            }
+        } finally {
+            setLoading(false);
+        }
+    }, [take, offset, loading, hasMore]);
+
+    useEffect(() => {
+        const container = containerRef.current;
+
+        const handleScroll = () => {
+            if (!container) return;
+
+            const scrollHeight = container.scrollHeight;
+            const scrollTop = container.scrollTop;
+            const clientHeight = container.clientHeight;
+
+            if (scrollHeight - scrollTop <= clientHeight + 20 && hasMore && !loading) {
+                fetchFriends();
             }
         };
-        fetchFriends();
-    }, [activeTab, accountApi]);
+
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (container) {
+                container.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [fetchFriends, hasMore, loading]);
+
+    const handleDeleteFriend = async (id) => {
+        await accountApi.removeFriend(profileId, id);
+        const response = await accountApi.getFriends(profileId);
+        setFriends(response);
+    };
+
+    const handleViewProfile = (id) => {
+        navigate(`/profile/user/${id}`);
+    };
 
     const toggleMenu = (profileId) => {
         setIsMenuOpen(isMenuOpen === profileId ? null : profileId);
@@ -44,89 +93,41 @@ function FriendsListComponent() {
         navigate(`/profile/user/${id}`);
     }
 
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
-
-    const handleDeleteFriend = async (id) => {
-        await accountApi.removeFriend(profileId, id);
-        const response = await accountApi.getFriends(profileId);
-        setFriends(response);
-    };
-
-    const handleViewProfile = (id) => {
-        navigate(`/profile/user/${id}`);
-    };
-
     return (
-        <ContentContainer>
-            <div className={style.tabs}>
-                <button
-                    className={activeTab === 'friends' ? style.active : ''}
-                    onClick={() => handleTabClick('friends')}
-                >
-                    Друзья
-                </button>
-                <button
-                    className={activeTab === 'requests' ? style.active : ''}
-                    onClick={() => handleTabClick('requests')}
-                >
-                    Заявки в друзья
-                </button>
-                <button
-                    className={activeTab === 'search' ? style.active : ''}
-                    onClick={() => handleTabClick('search')}
-                >
-                    Поиск друзей
-                </button>
-            </div>
+        <div className={style.friendsListContainer} ref={containerRef}>
+            {friends.length === 0 && !loading ? (
+                <div className={style.text}>У вас пока нет друзей</div>
+            ) : (
+                <ul>
+                    {friends.map((profile) => (
+                        <li key={profile.id} onClick={() => handleClick(profile.id)} className={style.friendItem}>
+                            {profile.photoUrl && (
+                                <img
+                                    src={profile.photoUrl}
+                                    alt={`${profile.firstName} ${profile.lastName}`}
+                                    className={style.friendPhoto}
+                                />
+                            )}
+                            <div className={style.friendInfo}>
+                                {profile.firstName} {profile.lastName}
+                            </div>
+                            <button onClick={(e) => { e.stopPropagation(); toggleMenu(profile.id); }} className={style.menuButton}>
+                                <FontAwesomeIcon icon={faEllipsisV} />
+                            </button>
 
-            {activeTab === 'friends' && (
-                <>
-                    <div className={style.friendsListContainer}>
-                        {friends.length === 0 ? (
-                            <div className={style.text}>У вас пока нет друзей</div>
-                        ) : (
-                            <ul>
-                                {friends.map((profile) => (
-                                    <li key={profile.id} onClick={() => handleClick(profile.id)} className={style.friendItem}>
-                                        {profile.photoUrl && (
-                                            <img
-                                                src={profile.photoUrl}
-                                                alt={`${profile.firstName} ${profile.lastName}`}
-                                                className={style.friendPhoto}
-                                            />
-                                        )}
-                                        <div className={style.friendInfo}>
-                                            {profile.firstName} {profile.lastName}
-                                        </div>
-                                        <button onClick={(e) => { e.stopPropagation(); toggleMenu(profile.id); }} className={style.menuButton}>
-                                            <FontAwesomeIcon icon={faEllipsisV} />
-                                        </button>
-
-                                        {isMenuOpen === profile.id && (
-                                            <div className={style.menu}>
-                                                <button onClick={(e) => { e.stopPropagation(); handleDeleteFriend(profile.id); }}>Удалить из друзей</button>
-                                                <button onClick={(e) => { e.stopPropagation(); handleViewProfile(profile.id); }}>Просмотр профиля</button>
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                </>
+                            {isMenuOpen === profile.id && (
+                                <div className={style.menu}>
+                                    <button onClick={(e) => { e.stopPropagation(); handleDeleteFriend(profile.id); }}>Удалить из друзей</button>
+                                    <button onClick={(e) => { e.stopPropagation(); handleViewProfile(profile.id); }}>Просмотр профиля</button>
+                                </div>
+                            )}
+                        </li>
+                    ))}
+                    {loading && <li>Загрузка...</li>}
+                </ul>
             )}
-
-            {activeTab === 'requests' && (
-                <FriendRequestComponent activeTab={activeTab} />
-            )}
-
-            {activeTab === 'search' && (
-                <FriendsSearchComponent />
-            )}
-        </ContentContainer>
+        </div>
     );
-};
+}
 
 export default FriendsListComponent;

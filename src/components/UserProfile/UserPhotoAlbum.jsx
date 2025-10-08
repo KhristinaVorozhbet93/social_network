@@ -9,15 +9,15 @@ function UserPhotoAlbum({ id }) {
         [loading, setLoading] = useState(true),
         [isCurrentUserProfile, setIsCurrentUserProfile] = useState(false),
         accountApi = useAccountApi(),
-        navigate = useNavigate(),
-        MAX_PHOTOS_TO_DISPLAY = 6;
+        navigate = useNavigate();
 
     useEffect(() => {
         const profileId = localStorage.getItem('profileId');
         const fetchPhotos = async () => {
             setLoading(true);
             try {
-                const data = await accountApi.getUserPhotosInAlbum(id);
+                const take = 6, offset = 0;
+                const data = await accountApi.getUserPhotosInAlbum(id, take, offset);
                 setPhotos(data);
             } finally {
                 setLoading(false);
@@ -41,14 +41,12 @@ function UserPhotoAlbum({ id }) {
         return <div>Загрузка альбома...</div>;
     }
 
-    const displayedPhotos = photos.slice(0, MAX_PHOTOS_TO_DISPLAY);
-
     return (
         <div className={style.albumContainer}>
             {photos.length > 0 ? (
                 <>
                     <div className={style.photoGrid}>
-                        {displayedPhotos.map((photo) => (
+                        {photos.map((photo) => (
                             <img
                                 key={photo.id}
                                 src={photo.filePath}
