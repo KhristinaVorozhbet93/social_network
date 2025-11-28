@@ -3,7 +3,7 @@ import style from './PetPfofileComponent.module.css';
 import { useAccountApi } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import PetPhotoAlbum from './PetPhotoAlbum';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';

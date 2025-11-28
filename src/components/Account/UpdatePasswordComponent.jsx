@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ContentContainer from "../ContentContainer";
+import ContentContainer from "../Layout/ContentContainer";
 import style from './UpdatePasswordComponent.module.css';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
 import { useAccountApi } from "../../App";

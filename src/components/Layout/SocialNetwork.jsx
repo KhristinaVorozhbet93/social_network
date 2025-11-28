@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import LoginComponent from "./Login/LoginComponent";
+import LoginComponent from "../Login/LoginComponent";
 import style from './SocialNetwork.module.css'
 
 function SocialNetwork() {

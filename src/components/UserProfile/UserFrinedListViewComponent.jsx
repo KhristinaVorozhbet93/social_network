@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ContentContainer from "../ContentContainer";
+import ContentContainer from "../Layout/ContentContainer";
 import style from '../Friends/FriendsComponent.module.css';
 import { useAccountApi } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";

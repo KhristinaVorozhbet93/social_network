@@ -28,6 +28,10 @@ import UpdatePasswordAccount from './components/Account/UpdatePasswordComponent'
 import DayComponent from './components/Planner/DayComponent';
 import Calendar from './components/Planner/Calendar';
 import FriendsComponent from './components/Friends/FriendsComponent';
+import ServiceComponent from './components/Services/ServiceComponent';
+import ServiceFormComponent from './components/Services/ServiceFormComponent';
+import DogWalkingUpdateComponent from './components/Services/DogWalkingUpdateComponent';
+import ServiceUpdateComponent from './components/Services/ServiceFormUpdateComponent';
 
 const AccountApiContext = createContext(null); // Инициализируем createContext с null
 
@@ -111,6 +115,10 @@ function App() {
 
             <Route path="/calendar" element={<Calendar />} />  
             <Route exact path="/" element={<LoginComponent />} />
+
+            <Route path="/services" element={<ServiceComponent />} />  
+            <Route path="/service/create" element={<ServiceFormComponent />} />  
+            <Route path="/service/:id/update" element={<ServiceUpdateComponent />} />  
 
           </Routes>
         </BrowserRouter>

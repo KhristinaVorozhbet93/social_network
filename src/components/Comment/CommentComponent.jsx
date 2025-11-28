@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import style from './CommentComponent.module.css';
-import { useAccountApi } from '../App';
+import { useAccountApi } from '../../App';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import style from './Login.module.css';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
 import { useAccountApi } from '../../App';
-import FooterComponent from '../FooterComponent';
+import FooterComponent from '../Layout/FooterComponent';
 
 function LoginComponent() {
   const

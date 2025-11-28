@@ -3,7 +3,7 @@ import style from "./CodeComponent.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAccountApi } from '../../App';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
-import FooterComponent from "../FooterComponent";
+import FooterComponent from "../Layout/FooterComponent";
 
 function CodeComponent() {
     const

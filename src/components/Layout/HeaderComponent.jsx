@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './HeaderComponent.module.css'
-import exitIcon from '../images/exit.png';
+import exitIcon from '../../images/exit.png';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/logo.png'; 
+import logo from '../../images/logo.png'; 
 
 function HeaderComponent() {
      const navigate = useNavigate();

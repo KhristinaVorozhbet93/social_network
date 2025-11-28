@@ -1,0 +1,127 @@
+.serviceCard {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.serviceCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.serviceHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #85655a;
+    padding-bottom: 12px;
+}
+
+.serviceTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.servicePrice {
+    background: linear-gradient(135deg, #85655a, #795548);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(133, 101, 90, 0.3);
+}
+
+.serviceDescription {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid #85655a;
+}
+
+.serviceDescription p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.serviceDetails {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+}
+
+.detailsGrid {
+    display: grid;
+    gap: 12px;
+}
+
+.detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.detailItem:last-child {
+    border-bottom: none;
+}
+
+.detailLabel {
+    font-weight: 600;
+    color: #666;
+    font-size: 15px;
+}
+
+.detailValue {
+    font-weight: 700;
+    color: #85655a;
+    font-size: 16px;
+    background: #f8f6f5;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .serviceHeader {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
+    .serviceTitle {
+        font-size: 20px;
+    }
+    
+    .detailItem {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 16px;
+}
+
+.error {
+    text-align: center;
+    padding: 40px;
+    color: #d32f2f;
+    background: #ffebee;
+    border-radius: 8px;
+    margin: 10px 0;
+}

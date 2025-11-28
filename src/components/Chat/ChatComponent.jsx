@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAccountApi } from '../../App';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import style from './ChatComponent.module.css';
 import ChatCreateComponent from './ChatCreateComponent';
 

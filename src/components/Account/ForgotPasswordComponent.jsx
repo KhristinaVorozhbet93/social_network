@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { useAccountApi } from '../../App';
 import CircularProgress from '@mui/material/CircularProgress';
-import FooterComponent from "../FooterComponent";
+import FooterComponent from "../Layout/FooterComponent";
 
 function ForgotPasswordComponent() {
   const

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './UserPhotoUploadForm.module.css';
 import { useAccountApi } from '../../App';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';

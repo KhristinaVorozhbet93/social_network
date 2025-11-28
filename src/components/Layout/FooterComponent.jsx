@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './FooterComponent.module.css'
-import SocialIcons from './SocialIcons';
-import dog from '../images/dog.png';
+import SocialIcons from '../SocialIcons';
+import dog from '../../images/dog.png';
 
 function FooterComponent() {
     return (

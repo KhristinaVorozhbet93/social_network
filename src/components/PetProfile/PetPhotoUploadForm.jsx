@@ -5,7 +5,7 @@ import { useAccountApi } from '../../App';
 import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 
 function PetPhotoUploadForm() {
   const

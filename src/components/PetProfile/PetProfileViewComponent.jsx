@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import style from './PetPfofileComponent.module.css';
 import { useAccountApi } from '../../App';
 import PetPhotoAlbum from './PetPhotoAlbum';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 
 function PetProfileViewComponent() {
     const

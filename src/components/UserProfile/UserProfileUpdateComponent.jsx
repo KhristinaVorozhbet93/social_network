@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAccountApi } from "../../App";
 import { useNavigate } from "react-router-dom";
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import style from './UserProfileUpdateComponent.module.css';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
 
@@ -22,7 +22,7 @@ function UserProfileUpdateComponent() {
         [selectedFile, setSelectedFile] = useState(null),
         [previewURL, setPreviewURL] = useState(null),
         accountApi = useAccountApi(),
-        navigate = useNavigate(), 
+        navigate = useNavigate(),
         accountId = localStorage.getItem('accountId');
 
     useEffect(() => {
@@ -152,16 +152,6 @@ function UserProfileUpdateComponent() {
                             value={dateOfBirth}
                             onChange={(e) => setDateOfBirth(e.target.value)}
                             className={style.form_input}
-                        />
-                    </div>
-                    <div className={style.form_group}>
-                        <label htmlFor="walksDogs">Выгул собак:</label>
-                        <input
-                            type="checkbox"
-                            id="walksDogs"
-                            checked={walksDogs}
-                            onChange={(e) => setWalksDogs(e.target.checked)}
-                            className={style.form_checkbox}
                         />
                     </div>
                     <div className={style.form_group}>

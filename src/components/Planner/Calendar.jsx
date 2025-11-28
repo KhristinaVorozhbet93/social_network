@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import style from './Calendar.module.css';
 import { useAccountApi } from '../../App';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import DayViewComponent from './DayViewComponent';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './PetProfileUpdateComponent.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAccountApi } from '../../App';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
 
 function PetProfileUpdateComponent() {

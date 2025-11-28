@@ -2,7 +2,7 @@ import { useState } from "react";
 import style from './FriendsComponent.module.css';
 import FriendRequestComponent from "./FriendRequestComponent";
 import FriendsSearchComponent from "./FriendsSearchComponent";
-import ContentContainer from "../ContentContainer";
+import ContentContainer from "../Layout/ContentContainer";
 import FriendsListComponent from "./FriendsListComponent";
 
 function FriendsComponent() {

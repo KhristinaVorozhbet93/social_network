@@ -3,7 +3,7 @@ import style from './DayComponent.module.css';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
 import { useAccountApi } from '../../App';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import TaskItem from './TaskItem';
 
 function DayComponent() {

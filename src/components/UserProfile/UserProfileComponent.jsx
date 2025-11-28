@@ -3,7 +3,7 @@ import style from './UserProfileComponent.module.css';
 import { useAccountApi } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import UserPhotoAlbum from './UserPhotoAlbum';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { parseISO, format, isValid } from 'date-fns';

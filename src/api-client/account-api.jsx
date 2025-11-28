@@ -951,5 +951,152 @@ class BaseApiClient {
             }
         }
     }
+
+
+    //services
+    async getServices(profileId) {
+        try {
+            const uri = "api/Service/GetServiceByProfileId";
+            const response = await axios.post(`${this.host}${uri}`, `"${profileId}"`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async getServiceById(serviceId) {
+        try {
+            const uri = "api/Service/GetServiceById";
+            var response = await axios.get(`${this.host}${uri}?serviceId=${serviceId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async deleteService(profileId) {
+        try {
+            const uri = "api/Service/DeleteService";
+            var response = await axios.delete(`${this.host}${uri}?id=${profileId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async getServiceTypes() {
+        try {
+            const uri = "api/ServiceType/GetServiceTypes";
+            var response = await axios.get(`${this.host}${uri}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async saveService(profileId, serviceTypeId) {
+        try {
+            const uri = "api/Service/AddService";
+
+            const request = {
+                profileId: profileId,
+                serviceTypeId: serviceTypeId
+            };
+            const response = await axios.post(`${this.host}${uri}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async getDogWalkingService(id) {
+        try {
+            const uri = "api/DogWalkingService/GetDogWalkingByServiceId";
+            var response = await axios.get(`${this.host}${uri}?serviceId=${id}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async updateServiceGeneralInfo(serviceId, price, description) {
+        try {
+            const uri = "api/Service/UpdateService";
+
+            const request = {
+                id: serviceId,
+                description: description,
+                price: price
+            };
+
+            const response = await axios.post(`${this.host}${uri}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+    async updateDogWalkingInfo(id, maxDogs, walkDurationMinutes) {
+        try {
+            const uri = "api/DogWalkingService/UpdateDogWalking";
+
+            const request = {
+                id: id,
+                maxDogs: maxDogs,
+                walkDurationMinutes: walkDurationMinutes
+            };
+
+            const response = await axios.post(`${this.host}${uri}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.status != HttpStatusCode.Ok) {
+                    throw new Error(error.response.data.message);
+                }
+            }
+        }
+    }
+
+
 }
 export default BaseApiClient; 

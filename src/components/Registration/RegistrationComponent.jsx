@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import FooterComponent from '../FooterComponent';
+import FooterComponent from '../Layout/FooterComponent';
 
 function RegistrationComponent() {
     const

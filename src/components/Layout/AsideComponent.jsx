@@ -1,15 +1,15 @@
 import React from 'react';
 import style from './AsideComponent.module.css';
 import { useNavigate } from "react-router-dom";
-import profileIcon from '../images/userProfile.png';
-import petIcon from '../images/petProfile.png';
-import friendsIcon from '../images/friends.png';
-import chatsIcon from '../images/chats.png';
-import calendarIcon from '../images/calendar.png';
-import storeIcon from '../images/shop.png';
-import forumIcon from '../images/forum.png';
-import serviceIcon from '../images/services.png';
-import settingsIcon from '../images/settings.png';
+import profileIcon from '../../images/userProfile.png';
+import petIcon from '../../images/petProfile.png';
+import friendsIcon from '../../images/friends.png';
+import chatsIcon from '../../images/chats.png';
+import calendarIcon from '../../images/calendar.png';
+import storeIcon from '../../images/shop.png';
+import forumIcon from '../../images/forum.png';
+import serviceIcon from '../../images/services.png';
+import settingsIcon from '../../images/settings.png';
 
 function AsideComponent() {
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ function AsideComponent() {
                 <img src={calendarIcon} alt="Calendar Icon" className={style.icon} />
                 <span>Календарь</span>
             </div>
-            <div className={style.menuItem} onClick={() => handleNavigate('/service')}>
+            <div className={style.menuItem} onClick={() => handleNavigate('/services')}>
                 <img src={serviceIcon} alt="Service Icon" className={style.icon} />
                 <span>Услуги</span>
             </div>

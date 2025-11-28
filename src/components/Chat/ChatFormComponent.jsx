@@ -3,7 +3,7 @@ import style from './ChatFormComponent.module.css';
 import * as signalR from "@microsoft/signalr";
 import { useAccountApi } from '../../App';
 import { useParams } from 'react-router-dom';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import moment from 'moment';
 
 function ChatFormComponent() {
@@ -65,6 +65,7 @@ function ChatFormComponent() {
         }
     }, [connectionRef.current, chatId, profileId]);
 
+
     const handleNewMessageChange = (event) => {
         setNewMessageText(event.target.value);
     };
@@ -77,7 +78,7 @@ function ChatFormComponent() {
         if (connectionRef.current) {
             try {
                 const userName = `${profile.firstName} ${profile.lastName}`;
-                await connectionRef.current.invoke("SendMessage", newMessageText, profileId, chatId);
+                await connectionRef.current.invoke("SendMessage", newMessageText, userName, profileId, chatId);
                 setNewMessageText('');
             } catch (error) {
                 console.error("Error sending message:", error);

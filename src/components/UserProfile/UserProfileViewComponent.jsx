@@ -3,7 +3,7 @@ import { useAccountApi } from '../../App';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import UserPhotoAlbum from './UserPhotoAlbum';
-import ContentContainer from '../ContentContainer';
+import ContentContainer from '../Layout/ContentContainer';
 import { parseISO, format, isValid } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
