@@ -1,6 +1,6 @@
 .tabs {
     display: flex;
-    background-color: var(--background-color); 
+    background: rgba(248, 240, 229, 0.9);
     border-bottom: 2px solid #ddd;
     padding: 10px;
     border-radius: 8px 8px 0 0;
@@ -20,14 +20,14 @@
 }
 
 .tabs button:hover {
-    background-color:#f8f8f8;
+    background: rgba(248, 240, 229, 0.9);
     color: #333;
 }
 
 .tabs button.active {
-    background-color: #fff;
-    color: #ff9800; 
-    border-bottom: 2px solid #ff9800; 
+    background-color: white;
+    color: #ff9800;
+    border-bottom: 2px solid #ff9800;
     font-weight: bold;
 }
 
@@ -40,17 +40,17 @@ ul {
 .friendsListContainer {
     display: flex;
     align-items: center;
-    background-color: var(--background-color);
+    background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    margin: 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
     justify-content: center;
 }
 
 .friendItem {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
@@ -59,21 +59,21 @@ ul {
 }
 
 .friendItem:hover {
-    background-color:#f8f8f8;
+    background-color: white;
 }
 
 .friendPhoto {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 20px; 
+    margin-right: 20px;
     object-fit: cover;
 }
 
 .friendInfo {
     font-size: 25px;
     color: #333;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 div {
@@ -88,29 +88,29 @@ div {
     cursor: pointer;
     padding: 5px;
     color: #888;
-    margin-left: auto; 
-  }
-  
-  .menuButton:hover {
+    margin-left: auto;
+}
+
+.menuButton:hover {
     color: #333;
-  }
-  
-  .menu {
+}
+
+.menu {
     position: absolute;
     top: 30;
     right: 4%;
-    background-color: #fff;
+    background: rgba(248, 240, 229, 0.9);
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10; 
-    min-width: 150px; 
+    z-index: 10;
+    min-width: 150px;
     padding: 5px 0;
     display: flex;
     flex-direction: column;
-  }
- 
-  .menuButton {
+}
+
+.menuButton {
     background: none;
     border: none;
     cursor: pointer;
@@ -134,8 +134,7 @@ div {
     transform: translateY(-2px);
 }
 
-.text
-{
+.text {
     font-size: 20px;
     color: #333;
 }

@@ -1,0 +1,60 @@
+.servicesListContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    border: 2px solid #ffcc80;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #fffaf0;
+}
+
+.servicesListContainer div {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.servicesListContainer ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.serviceItem {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.serviceItem:hover {
+    background-color: #f8f8f8;
+}
+
+.servicePhoto {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.serviceInfo {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.noServicesText {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    padding: 30px;
+    margin-top: 20px;
+}

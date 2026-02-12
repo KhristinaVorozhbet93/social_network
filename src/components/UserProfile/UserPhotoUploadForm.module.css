@@ -26,7 +26,7 @@
     width: 80%;
     box-sizing: border-box;
     color: var(--text-color);
-    background-color: #fffaf0;
+    background-color: white;
 }
 
 .photoUploadForm input[type="file"]::file-selector-button {

@@ -33,7 +33,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #ffcc80;
     border-radius: 5px;
     padding: 5px 0;
@@ -94,7 +94,7 @@
     border: 2px solid #ffcc80; 
     border-radius: 10px;
     margin-top: 20px;
-    background-color: #fffaf0;
+    background-color: white;
 }
 
 .noPhotosContainer div {

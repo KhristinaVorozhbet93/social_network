@@ -7,7 +7,7 @@
   --text-color: #333;
   --max-width: 800px;
   --font-family: 'Rubik', cursive;
-  --background-color: #f8f8f8;
+  --background: rgba(248, 240, 229, 0.9);
 }
 
 .loading {
@@ -33,7 +33,7 @@
 }
 
 .chatItem {
-  background-color: var(--background-color);
+  background: rgba(248, 240, 229, 0.9);
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 20px;
@@ -86,17 +86,12 @@
   transform: translateY(-2px);
 }
 
-
-
-
-
-
 .noChats {
   text-align: center;
   font-size: 20px;
   color: var(--primary-color);
   padding: 40px;
-  background-color: var(--background-color);
+  background: rgba(248, 240, 229, 0.9);
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 0 auto;

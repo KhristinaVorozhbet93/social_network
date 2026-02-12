@@ -6,7 +6,7 @@ import ContentContainer from '../Layout/ContentContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Snackbar, Alert, CircularProgress } from '@mui/material';
-import ServiceFactory from '../ServiceFactory';
+import ServiceFactory, { FactoryType } from '../ServiceFactory';
 
 function ServiceComponent() {
     const
@@ -119,14 +119,12 @@ function ServiceComponent() {
             <div className={style.tabContent}>
                 <div className={style.formContent}>
                     <section>
-                        <div className={style.profileContainer}>
-                            <div className={style.profilePhotoAndInfo}>
-                                {currentService && (
-                                    <>
-                                        <ServiceFactory service={currentService} />
-                                    </>
-                                )}
-                            </div>
+                        <div className={style.profilePhotoAndInfo}>
+                            {currentService && (
+                                <>
+                                    <ServiceFactory factoryType={FactoryType.EDIT} service={currentService} />
+                                </>
+                            )}
 
                             <div className={style.menuContainer}>
                                 <FontAwesomeIcon

@@ -32,6 +32,9 @@ import ServiceComponent from './components/Services/ServiceComponent';
 import ServiceFormComponent from './components/Services/ServiceFormComponent';
 import DogWalkingUpdateComponent from './components/Services/DogWalkingUpdateComponent';
 import ServiceUpdateComponent from './components/Services/ServiceFormUpdateComponent';
+import UserServiceListViewComponent from './components/UserProfile/UserServiceListViewComponent';
+import ServiceViewComponent from './components/Services/ServiceViewComponent';
+import UserBookingComponent from './components/Services/UserBookingComponent';
 
 const AccountApiContext = createContext(null); // Инициализируем createContext с null
 
@@ -84,18 +87,18 @@ function App() {
     <div>
       <AccountApiContext.Provider value={accountApiClient}>
         <BrowserRouter>
-          <Routes> 
+          <Routes>
             <Route path="/auth/login" element={<LoginComponent />} />
             <Route path="/auth/registration" element={<RegistrationComponent />} />
             <Route path="/auth/password" element={<ForgotPasswordComponent />} />
-            <Route path="/auth/code" element={<CodeComponent />} />   
-            <Route path="/auth/password/update" element={<UpdatePasswordAccount />} />   
+            <Route path="/auth/code" element={<CodeComponent />} />
+            <Route path="/auth/password/update" element={<UpdatePasswordAccount />} />
 
             <Route path="/profile/pet" element={<PetProfileComponent />} />
             <Route path="/profile/pet/:id/add-photo" element={<PetPhotoUploadForm />} />
             <Route path="/profile/pet/:id/photos" element={<PetFullPhotoGallery />} />
             <Route path="/profile/pet/:id" element={<PetProfileViewComponent />} />
-            <Route path="/profile/pet/create" element={<PetProfileFormComponent />} />           
+            <Route path="/profile/pet/create" element={<PetProfileFormComponent />} />
             <Route path="/profile/pet/:id/update" element={<PetProfileUpdateComponent />} />
 
             <Route path="/friends" element={<FriendsComponent />} />
@@ -103,23 +106,26 @@ function App() {
             <Route path="/profile/user" element={<UserProfileComponent />} />
             <Route path="/profile/user/:id/photos" element={<UserProfilePhotoGallery />} />
             <Route path="/profile/user/:id" element={<UserProfileViewComponent />} />
-            <Route path="/profile/user/add-photo" element={<UserPhotoUploadForm/>} />
-            <Route path="/profile/user/update" element={<UserProfileUpdateComponent/>} />
-            <Route path="/profile/user/:id/friends" element={<UserFrinedListViewComponent/>} />
-            <Route path="/profile/user/:id/pets" element={<UserPetsistViewComponent/>} />
+            <Route path="/profile/user/add-photo" element={<UserPhotoUploadForm />} />
+            <Route path="/profile/user/update" element={<UserProfileUpdateComponent />} />
+            <Route path="/profile/user/:id/friends" element={<UserFrinedListViewComponent />} />
+            <Route path="/profile/user/:id/pets" element={<UserPetsistViewComponent />} />
+            <Route path="/profile/user/:id/pets" element={<UserPetsistViewComponent />} />
+            <Route path="/profile/user/:id/services" element={<UserServiceListViewComponent />} />
 
-            <Route path="/chats" element={<ChatComponent />} />   
-            <Route path="/chat/:id" element={<ChatFormComponent />} />  
+            <Route path="/chats" element={<ChatComponent />} />
+            <Route path="/chat/:id" element={<ChatFormComponent />} />
 
             <Route exact path="/calendar/day" element={<DayComponent />} />
 
-            <Route path="/calendar" element={<Calendar />} />  
+            <Route path="/calendar" element={<Calendar />} />
             <Route exact path="/" element={<LoginComponent />} />
 
-            <Route path="/services" element={<ServiceComponent />} />  
-            <Route path="/service/create" element={<ServiceFormComponent />} />  
-            <Route path="/service/:id/update" element={<ServiceUpdateComponent />} />  
-
+            <Route path="/services" element={<ServiceComponent />} />
+            <Route path="/service/create" element={<ServiceFormComponent />} />
+            <Route path="/service/:id/update" element={<ServiceUpdateComponent />} />
+            <Route path="/profile/service/:id" element={<ServiceViewComponent />} />
+            <Route path="/reservations" element={<UserBookingComponent />} />
           </Routes>
         </BrowserRouter>
       </AccountApiContext.Provider>

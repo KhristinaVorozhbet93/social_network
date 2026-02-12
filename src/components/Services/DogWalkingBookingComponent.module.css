@@ -1,0 +1,447 @@
+.bookingsContainer {
+    padding: 20px;
+}
+
+.bookingsTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #795548;
+    color: #333;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.bookingsTitle svg {
+    color: #795548;
+    font-size: 24px;
+}
+
+.bookingsCount {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.bookingsLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    background: rgba(248, 240, 229, 0.9);
+    border-radius: 8px;
+    min-height: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
+    margin: 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #795548;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingText {
+    margin-top: 15px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.noBookings {
+    text-align: center;
+    padding: 60px 30px;
+    background: rgba(248, 240, 229, 0.9);
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 2px solid #ffcc80;
+}
+
+.noBookingsIcon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #795548;
+    opacity: 0.7;
+}
+
+.noBookingsTitle {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.bookingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bookingCard {
+    background: rgba(248, 240, 229, 0.9);
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.bookingCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(121, 85, 72, 0.1);
+    border-color: #FFB74D;
+}
+
+.bookingContent {
+    padding: 20px;
+}
+
+.bookingHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.bookingUserInfo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.userAvatarContainer {
+    flex-shrink: 0;
+}
+
+.userAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #795548;
+}
+
+.userAvatarPlaceholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #85655a, #795548);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    border: 2px solid #795548;
+}
+
+.userInfo {
+    flex: 1;
+}
+
+.bookingUserName {
+    font-weight: 700;
+    color: #333;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.currentUserChip {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.bookingDateTime {
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bookingDateTime svg {
+    font-size: 16px;
+}
+
+.bookingStatusActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.statusChip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.statusIcon {
+    font-size: 16px;
+}
+
+.statusPending {
+    background-color: #fff3e0;
+    color: #ef6c00;
+    border: 1px solid #ffb74d;
+}
+
+.statusConfirmed {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #64b5f6;
+}
+
+.statusCancelled {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.statusCompleted {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+}
+
+.statusDefault {
+    background-color: #f5f5f5;
+    color: #616161;
+    border: 1px solid #bdbdbd;
+}
+
+.bookingDetails {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.bookingDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.bookingDetail:hover {
+    border-color: #FFB74D;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.bookingDetailLabel {
+    font-weight: 700;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bookingDetailLabel svg {
+    color: #795548;
+    font-size: 16px;
+}
+
+.bookingDetailValue {
+    font-weight: 700;
+    color: #333;
+    font-size: 16px;
+    text-align: right;
+}
+
+.quickActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.quickActions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    min-width: 200px;
+}
+
+.confirmButton,
+.completeButton {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+}
+
+.confirmButton:hover:not(:disabled),
+.completeButton:hover:not(:disabled) {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(245, 124, 0, 0.3);
+}
+
+.cancelButton {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+}
+
+.cancelButton:hover:not(:disabled) {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+}
+
+.quickActions button:disabled {
+    background: #ccc;
+    color: #777;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.buttonIcon {
+    font-size: 14px;
+}
+
+.buttonSpinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .bookingHeader {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .bookingUserInfo {
+        min-width: 100%;
+    }
+
+    .bookingStatusActions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .bookingDetails {
+        grid-template-columns: 1fr;
+    }
+
+    .quickActions {
+        flex-direction: column;
+    }
+
+    .quickActions button {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .bookingsTitle {
+        font-size: 20px;
+        flex-wrap: wrap;
+    }
+
+    .bookingUserName {
+        font-size: 18px;
+    }
+
+    .bookingDetailLabel,
+    .bookingDetailValue {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bookingCard {
+        margin: 0 -10px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .bookingContent {
+        padding: 15px;
+    }
+
+    .bookingUserInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .userInfo {
+        width: 100%;
+    }
+
+    .bookingDateTime {
+        flex-wrap: wrap;
+    }
+}

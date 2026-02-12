@@ -1,5 +1,5 @@
 .friendRequestsContainer {
-    background-color: var(--background-color);
+  background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -25,12 +25,12 @@
 }
 
 .requestTabs button:hover {
-    background-color: #f8f8f8;
+     background: rgba(248, 240, 229, 0.9);
     color: #333;
 }
 
 .requestTabs button.active {
-    background-color: #fff;
+  background: rgba(248, 240, 229, 0.9);
     color: #ff9800;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -45,7 +45,7 @@ h3 {
 .requestListContainer {
     display: flex;
     align-items: center;
-    background-color: var(--background-color);
+  background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -134,8 +134,7 @@ li button:hover {
     white-space: nowrap;
 }
 
-.text
-{
+.text {
     font-size: 20px;
     color: #333;
 }

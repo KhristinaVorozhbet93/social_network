@@ -15,11 +15,12 @@ function UserProfileViewComponent() {
         [hasReceivedRequest, setHasReceivedRequest] = useState(false),
         [hasSentRequest, setHasSentRequest] = useState([]),
         [loading, setLoading] = useState(true),
+        [services, setServices] = useState([]),
         [requestSent, setRequestSent] = useState(false),
         [pets, setPets] = useState([]),
         { id } = useParams(),
         accountApi = useAccountApi(),
-        navigate = useNavigate(), 
+        navigate = useNavigate(),
         profileId = localStorage.getItem('profileId');
 
     useEffect(() => {
@@ -42,6 +43,8 @@ function UserProfileViewComponent() {
                 setIsFriend(isFriendCheck);
                 const hasRequest = await accountApi.hasSentRequest(profileId, id);
                 setHasReceivedRequest(hasRequest);
+                const services = await accountApi.getServices(id);
+                setServices(services);
             } finally {
                 setLoading(false);
             }
@@ -95,6 +98,10 @@ function UserProfileViewComponent() {
         navigate(`/profile/user/${id}/friends`);
     };
 
+    const navigateToServices = () => {
+        navigate(`/profile/user/${id}/services`);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -103,7 +110,7 @@ function UserProfileViewComponent() {
         <ContentContainer>
             <div className={style.formContent}>
                 <section>
-                <h2 className={style.galleryHeading}>Профиль</h2>
+                    <h2 className={style.galleryHeading}>Профиль</h2>
                     <div className={style.profileContainer}>
                         <div className={style.profilePhotoAndInfo}>
                             <img
@@ -175,7 +182,7 @@ function UserProfileViewComponent() {
                     <div className={style.friendsListContainer}>
                         {friends.length === 0 ? (
                             <div className={style.noPhotosContainer}>
-                                 <div className={style.noPhotosText}>У пользователя нет друзей</div>
+                                <div className={style.noPhotosText}>У пользователя нет друзей</div>
                             </div>
                         ) : (
                             <ul className={style.friendsList}>
@@ -209,7 +216,7 @@ function UserProfileViewComponent() {
                     <div className={style.friendsListContainer}>
                         {pets.length === 0 ? (
                             <div className={style.noPhotosContainer}>
-                                 <div className={style.noPhotosText}>У пользователя нет питомцев</div>
+                                <div className={style.noPhotosText}>У пользователя нет питомцев</div>
                             </div>
                         ) : (
                             <ul className={style.friendsList}>
@@ -218,6 +225,39 @@ function UserProfileViewComponent() {
                                         {pet.photoUrl && (
                                             <img
                                                 src={pet.photoUrl}
+                                                className={style.friendPhoto}
+                                                style={{ width: `${100 - index * 10}%`, height: `${100 - index * 10}%` }}
+                                            />
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </section>
+
+                <section>
+                    <div className={style.headerContainer}>
+                        <h2 className={style.galleryHeading} onClick={() => navigateToServices()}>Услуги</h2>
+                        <div className={style.buttonContainer}>
+                            <button onClick={() => navigateToServices()} className={style.viewAllButton}>
+                                Просмотр услуг
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className={style.friendsListContainer}>
+                        {services.length === 0 ? (
+                            <div className={style.noPhotosContainer}>
+                                <div className={style.noPhotosText}>Пользователь не предоставляет услуг.</div>
+                            </div>
+                        ) : (
+                            <ul className={style.friendsList}>
+                                {services.slice(0, 6).map((services, index) => (
+                                    <li key={services.id} onClick={() => navigateToServices()} className={style.friendItem}>
+                                        {services.photoUrl && (
+                                            <img
+                                                src={services.photoUrl}
                                                 className={style.friendPhoto}
                                                 style={{ width: `${100 - index * 10}%`, height: `${100 - index * 10}%` }}
                                             />

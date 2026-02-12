@@ -1,6 +1,5 @@
 :root {
     --max-width: 800px;
-    --background-color: #f5f5dc;
     --text-color: #333;
 }
 
@@ -13,7 +12,6 @@
     background-color: white;
     display: flex;
     align-items: center;
-    background-color: var(--background-color);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

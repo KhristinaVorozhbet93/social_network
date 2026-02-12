@@ -97,11 +97,6 @@ function UserProfileComponent() {
                                         <span>Дата рождения:</span> <span>{formatDate(profile.dateOfBirth)}</span>
                                     </div>
                                 )}
-                                {/* {profile.walksDogs !== null && (
-                                    <div className={style.profileInfoRow}>
-                                        <span>Гуляет с собаками:</span> <span>{profile.walksDogs ? 'Да' : 'Нет'}</span>
-                                    </div>
-                                )} */}
                                 {profile.profession && (
                                     <div className={style.profileInfoRow}>
                                         <span>Профессия:</span> <span>{profile.profession}</span>

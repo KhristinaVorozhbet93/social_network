@@ -1098,5 +1098,122 @@ class BaseApiClient {
     }
 
 
+    //booking
+    async getAvailableSlots(serviceId) {
+        try {
+            const uri = "api/Booking/GetAvailableSlots";
+            const response = await axios.get(`${this.host}${uri}`, {
+                params: { serviceId }
+            });
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+    async updateServiceSlots(serviceId, selectedTimeSlots) {
+        try {
+            const uri = "api/Booking/UpdateSlots";
+            const request = selectedTimeSlots.map(slot => ({
+                slotDateTime: new Date(`${slot.date}T${slot.time}:00`).toISOString(),
+                isAvailable: true
+            }));
+
+            const response = await axios.post(`${this.host}${uri}?serviceId=${serviceId}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+    async bookSlot(slotId, serviceId, profileId, bookingAddress) {
+        try {
+            const uri = "api/Booking/AddBooking";
+            const request = {
+                slotId: slotId,
+                serviceId: serviceId,
+                profileId: profileId, 
+                address : bookingAddress
+            };
+
+            const response = await axios.post(`${this.host}${uri}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+    async getBookings(serviceId) {
+        try {
+            const uri = "api/Booking/GetBookingsByServiceId";
+            const response = await axios.get(`${this.host}${uri}?serviceId=${serviceId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+        async getUserBookings(profileId) {
+        try {
+            const uri = "api/Booking/GetBookingsByProfileId";
+            const response = await axios.get(`${this.host}${uri}?profileId=${profileId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+    async updateBookingStatus(bookingId, status) {
+        try {
+            const uri = "api/Booking/UpdateBookingStatus";
+            const request = {
+                bookingId: bookingId,
+                status: status
+            };
+
+            const response = await axios.post(`${this.host}${uri}`, request);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
+
+    async deleteBooking(bookingId) {
+        try {
+            const uri = "api/Booking/DeleteBooking";
+            const response = await axios.delete(`${this.host}${uri}?bookingId=${bookingId}`);
+            return response.data;
+        }
+        catch (error) {
+            if (error.response) {
+                throw new Error(error.response.data?.message || `Ошибка ${error.response.status}`);
+            }
+            throw error;
+        }
+    }
 }
 export default BaseApiClient; 

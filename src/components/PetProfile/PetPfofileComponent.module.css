@@ -8,7 +8,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    background-color: var(--background-color);
+    background: white;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -91,7 +91,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-color);
+    background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -191,7 +191,7 @@ h2 {
     background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 5px;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 .tab {
@@ -205,34 +205,34 @@ h2 {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     font-weight: bold;
-    white-space: nowrap; 
+    white-space: nowrap;
     font-size: 20px;
 }
 
 .tab:hover {
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .activeTab {
-    background:  #FFB74D;
+    background: #FFB74D;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
 }
 
-.tab:last-child {  
-    background:  #FFB74D;
+.tab:last-child {
+    background: #FFB74D;
     color: var(--text-color);
     font-size: 20px;
-    line-height: 1; 
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px; 
-    height: 35px;  
-    border-radius: 50%; 
-    padding: 0;    
-    margin-left: auto; 
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 0;
+    margin-left: auto;
 }
 
 .tab:last-child:hover {
@@ -242,15 +242,15 @@ h2 {
 
 .addProfile {
     text-align: center;
-    padding: 40px; 
-    border: 2px solid #ffcc80; 
+    padding: 40px;
+    border: 2px solid #ffcc80;
     border-radius: 10px;
     margin-top: 20px;
     background-color: #fffaf0;
 }
 
 .addProfile div {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     font-size: 20px;
 }
 
@@ -271,6 +271,3 @@ h2 {
     background: linear-gradient(to right, #F57C00, #E65100);
     transform: translateY(-2px);
 }
-
-
-

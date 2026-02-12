@@ -1,19 +1,29 @@
 import DogWalkingComponent from './Services/DogWalkingComponent';
+import DogWalkingViewComponent from './Services/DogWalkingViewComponent';
 
-const ServiceFactory = ({ service }) => {
+const SERVICE_TYPE_IDS = {
+  DOG_WALKING: 'a3d4e5f6-7890-1234-5678-9abcdef01234'
+};
 
-  //не нравится тут маппинг
-  const SERVICE_TYPE_MAPPING = {
-    'a3d4e5f6-7890-1234-5678-9abcdef01234': 'dogWalking',
-  };
-  const serviceType = SERVICE_TYPE_MAPPING[service.serviceTypeId];
+const ServiceFactory = ({ factoryType, service }) => {
+  const { serviceTypeId } = service;
 
-  switch (serviceType) {
-    case 'dogWalking':
-      return <DogWalkingComponent service={service} />;
-    default:
-      return <>НОВЫЙ ВИД</>;
+  switch (serviceTypeId) {
+    case SERVICE_TYPE_IDS.DOG_WALKING:
+      switch (factoryType) {
+        case 'VIEW':
+          return <DogWalkingViewComponent  service={service} />;
+        case 'EDIT':
+          return <DogWalkingComponent service={service} />;
+        default:
+          return <DogWalkingViewComponent service={service} />;
+      }
   }
 };
 
 export default ServiceFactory;
+
+export const FactoryType = {
+  VIEW: 'VIEW',
+  EDIT: 'EDIT'
+};

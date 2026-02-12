@@ -10,6 +10,7 @@ import storeIcon from '../../images/shop.png';
 import forumIcon from '../../images/forum.png';
 import serviceIcon from '../../images/services.png';
 import settingsIcon from '../../images/settings.png';
+import reservationIcon from '../../images/reservation.png';
 
 function AsideComponent() {
     const navigate = useNavigate();
@@ -45,7 +46,16 @@ function AsideComponent() {
                 <img src={serviceIcon} alt="Service Icon" className={style.icon} />
                 <span>Услуги</span>
             </div>
+                 <div className={style.menuItem} onClick={() => handleNavigate('/reservations')}>
+                <img src={reservationIcon} alt="Reservation" className={style.icon} />
+                <span>Бронирования</span>
+            </div>
             <div className={style.menuItem} onClick={() => handleNavigate('/profile')}>
+                <img src={settingsIcon} alt="Settings Icon" className={style.icon} />
+                <span>Настройки</span>
+            </div>
+
+            {/* <div className={style.menuItem} onClick={() => handleNavigate('/profile')}>
                 <img src={settingsIcon} alt="Settings Icon" className={style.icon} />
                 <span>Настройки</span>
             </div>
@@ -56,11 +66,8 @@ function AsideComponent() {
             <div className={style.menuItem} onClick={() => handleNavigate('/profile')}>
                 <img src={forumIcon} alt="Forum Icon" className={style.icon} />
                 <span>Форум</span>
-            </div>
-            <div className={style.menuItem} onClick={() => handleNavigate('/profile')}>
-                <img src={settingsIcon} alt="Settings Icon" className={style.icon} />
-                <span>Настройки</span>
-            </div>
+            </div> */}
+
         </div>
     </aside>
 );

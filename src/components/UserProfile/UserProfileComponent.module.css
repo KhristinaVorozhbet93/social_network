@@ -1,6 +1,5 @@
 :root {
     --shadow-color: rgba(0, 0, 0, 0.2);
-    --background-color: #f5f5dc;
     --text-color: #333;
 }
 
@@ -8,7 +7,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    background-color: var(--background-color);
+    background-color: white;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -34,7 +33,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -76,7 +75,7 @@
 .profileInfoRow {
     display: flex;
     gap: 0.2rem;
-    align-items: start; 
+    align-items: start;
     color: #333;
     font-weight: bold;
     font-size: 17px;
@@ -88,8 +87,8 @@
 }
 
 .profileInfoRow p {
-    margin: 0; 
-    word-break: break-word; 
+    margin: 0;
+    word-break: break-word;
 }
 
 .formContent p {
@@ -111,7 +110,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-color);
+    background-color: white;
     border-radius: 10px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -221,9 +220,6 @@ h2 {
     font-size: 20px;
 }
 
-.group_buttons
-{
+.group_buttons {
     margin-bottom: 15px;
 }
-
-

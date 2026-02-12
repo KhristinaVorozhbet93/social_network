@@ -1,154 +1,516 @@
 .updateContainer {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-}
-
-.updateContainer h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-    font-size: 28px;
+    font-family: inherit;
+    margin-right: 50px;
 }
 
 .form {
-    background: #f9f9f9;
+    display: flex;
+    gap: 20px;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(248, 240, 229, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .section {
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
 }
 
 .section:last-child {
     border-bottom: none;
 }
 
-.section h3 {
-    color: #85655a;
+.sectionTitle {
+    color: #333;
     margin-bottom: 20px;
-    font-size: 20px;
-    border-left: 4px solid #85655a;
-    padding-left: 12px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.sectionDescription {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-size: 18px;
+}
+
+.mainInfoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.inputsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.descriptionColumn {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    height: 90%;
+}
+
+.descriptionColumn label {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: 600;
+    display: block;
 }
 
 .formGroup {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .formGroup label {
-    display: block;
+    font-size: 18px;
     margin-bottom: 8px;
-    font-weight: 600;
     color: #333;
-    font-size: 16px;
+    font-weight: 600;
 }
 
-.input, .textarea, .select {
+.formGroup label::after {
+    content: " *";
+    color: red;
+}
+
+.descriptionBlock label::after {
+    content: "";
+}
+
+.input,
+.select,
+.textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: box-shadow 0.2s ease-in-out;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-    background: white;
 }
 
-.input:focus, .textarea:focus, .select:focus {
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: #FFB74D;
     outline: none;
-    border-color: #85655a;
-    box-shadow: 0 0 0 3px rgba(133, 101, 90, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 200px;
+    flex-grow: 1;
     font-family: inherit;
+    line-height: 1.5;
 }
 
-.select {
+.calendarSection {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.calendarContainer {
+    flex: 1;
+    min-width: 350px;
+}
+
+.timeSlotsSection {
+    flex: 1;
+    min-width: 350px;
+}
+
+.calendar {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.selectedDate {
+    background-color: #795548 !important;
+    color: white !important;
+    border-radius: 50% !important;
+}
+
+.noDates {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+}
+
+.selectedDatesList {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.dateSlot {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dateHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.dateHeader strong {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.removeDate {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+    transition: all 0.2s;
+}
+
+.removeDate:hover {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+}
+
+.removeDate:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.timeSlotsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.timeSlot {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timeSlot:hover:not(:disabled) {
+    background: linear-gradient(to bottom, #e9e9e9, #f9f9f9);
+    border-color: #aaa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.timeSlotSelected {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border-color: #795548;
+}
+
+.timeSlotSelected:hover:not(:disabled) {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    border-color: #E65100;
+}
+
+.timeSlot:disabled {
+    background: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.slotsSummary {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    border-left: 4px solid #795548;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.summaryHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.summaryHeader strong {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.warningText {
+    color: #F57C00;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.slotsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.slotBadge {
+    display: inline-block;
+    background: white;
+    border: 1px solid #795548;
+    color: #795548;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .buttons {
     display: flex;
     gap: 15px;
-    justify-content: flex-end;
     margin-top: 30px;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
 }
 
-.submitButton {
-    background: linear-gradient(135deg, #85655a, #795548);
-    color: white;
+.submitButton,
+.cancelButton {
+    background: linear-gradient(to right, #85655a, #795548);
+    padding: 14px 24px;
     border: none;
-    padding: 14px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 180px;
+    transition: background-color 0.2s;
+    min-width: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    font-weight: 600;
 }
 
 .submitButton:hover:not(:disabled) {
-    background: linear-gradient(135deg, #75655a, #695548);
+    background: linear-gradient(to right, #F57C00, #E65100);
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .submitButton:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .cancelButton {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 14px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 120px;
+    background: linear-gradient(to right, #9e9e9e, #757575);
+    border: 1px solid #ddd;
 }
 
 .cancelButton:hover:not(:disabled) {
-    background: #5a6268;
+    background: linear-gradient(to right, #757575, #616161);
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cancelButton:disabled {
-    background: #ccc;
+    background: #e0e0e0;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
-/* Адаптивность */
+.clearAllButton {
+    background: linear-gradient(to right, #85655a, #795548);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clearAllButton:hover:not(:disabled) {
+    background: linear-gradient(to right, #F57C00, #E65100);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.clearAllButton:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.clearAllButton:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+.loading,
+.errorMessage {
+    text-align: center;
+    padding: 50px;
+    font-size: 22px;
+    color: #333;
+    background: rgba(248, 240, 229, 0.9);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.errorMessage {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+.react-calendar {
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.react-calendar__tile--active {
+    background: #795548;
+    color: white;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: #F57C00;
+}
+
+.react-calendar__navigation button {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.react-calendar__month-view__weekdays {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.react-calendar__tile {
+    font-size: 16px;
+    padding: 15px 8px;
+}
+
 @media (max-width: 768px) {
-    .updateContainer {
-        padding: 15px;
+    .mainInfoGrid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-    
-    .form {
-        padding: 20px;
-    }
-    
-    .buttons {
+
+    .calendarSection {
         flex-direction: column;
     }
-    
-    .submitButton, .cancelButton {
-        min-width: auto;
+
+    .calendarContainer,
+    .timeSlotsSection {
+        min-width: 100%;
+    }
+
+    .timeSlotsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .buttons {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .submitButton,
+    .cancelButton {
+        min-width: 100%;
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeSlotsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form {
+        padding: 15px;
+    }
+
+    .sectionTitle {
+        font-size: 22px;
+    }
+
+    .input,
+    .select,
+    .textarea {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .buttons {
+        padding: 0 10px;
     }
 }

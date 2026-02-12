@@ -4,19 +4,6 @@
     --text-color: #333;
 }
 
-.profileContainer {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    background-color: var(--background-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    position: relative;
-    border: 1px solid #ddd;
-}
-
 .menuContainer {
     position: absolute;
     top: 10px;
@@ -45,11 +32,9 @@
 }
 
 .menuDropdown button {
-    background: linear-gradient(to right, #FFCC80, #FFB74D);
+    background: none;
     padding: 8px 15px;
     border: none;
-    padding: 14px 18px;
-    background: none;
     text-align: left;
     cursor: pointer;
     color: #333;
@@ -58,7 +43,6 @@
 
 .menuDropdown button:hover {
     background: linear-gradient(to right, #F57C00, #E65100);
-    transform: translateY(-2px);
 }
 
 .profilePhotoAndInfo {
@@ -67,131 +51,12 @@
     gap: 20px;
 }
 
-.profileInfo {
-    text-align: left;
-    flex: 1;
-}
-
-.formContent p {
-    color: var(--text-color);
-    margin-bottom: 5px;
-    font-size: 20px;
-}
-
-.profilePhoto {
-    border-radius: 50%;
-    border: 2px solid #ff9800;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.friendsListContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--background-color);
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-}
-
-.friendsList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.friendItem {
-    margin-right: 10px;
-    cursor: pointer;
-    flex-shrink: 0;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.friendItem:last-child {
-    margin-right: 0;
-}
-
-.friendPhoto {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.friendItem:hover .friendPhoto {
-    transform: scale(1.1);
-}
-
-section {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.gallerySection {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.galleryHeading {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 30px;
-}
-
-.viewAllButton {
-    background: linear-gradient(to right, #FFCC80, #FFB74D);
-    border: none;
-    padding: 14px 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    color: var(--text-color);
-    font-size: 20px;
-}
-
-.viewAllButton:hover {
-    background: linear-gradient(to right, #F57C00, #E65100);
-    transform: translateY(-2px);
-}
-
 .tabs {
     display: flex;
     background: rgba(248, 240, 229, 0.9);
     border-radius: 10px;
     padding: 5px;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
 .tab {
@@ -205,34 +70,34 @@ h2 {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     font-weight: bold;
-    white-space: nowrap; 
+    white-space: nowrap;
     font-size: 20px;
 }
 
 .tab:hover {
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .activeTab {
-    background:  #FFB74D;
+    background: #FFB74D;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
 }
 
-.tab:last-child {  
-    background:  #FFB74D;
+.tab:last-child {
+    background: #FFB74D;
     color: var(--text-color);
     font-size: 20px;
-    line-height: 1; 
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px; 
-    height: 35px;  
-    border-radius: 50%; 
-    padding: 0;    
-    margin-left: auto; 
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 0;
+    margin-left: auto;
 }
 
 .tab:last-child:hover {
@@ -242,15 +107,15 @@ h2 {
 
 .addProfile {
     text-align: center;
-    padding: 40px; 
-    border: 2px solid #ffcc80; 
+    padding: 40px;
+    border: 2px solid #ffcc80;
     border-radius: 10px;
     margin-top: 20px;
     background-color: #fffaf0;
 }
 
 .addProfile div {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     font-size: 20px;
 }
 
@@ -271,6 +136,3 @@ h2 {
     background: linear-gradient(to right, #F57C00, #E65100);
     transform: translateY(-2px);
 }
-
-
-
